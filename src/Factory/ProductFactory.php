@@ -35,12 +35,12 @@ final class ProductFactory extends ModelFactory
     {
         $faker = Factory::create();
         $faker->addProvider(new CustomProvider($faker));
-
+        $product = $faker->product();
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => $faker->name(),// self::faker()->name(),
-            'sku' => self::faker()->randomNumber(5),
-            'long_description' => $faker->description(),//self::faker()->text(maxNbChars: 200)
+            'name' => $product['name'], //$faker->name(),
+            'sku' => $product['sku'], //self::faker()->randomNumber(5),
+            'long_description' => $product['description'] //$faker->description(),
         ];
     }
 

@@ -41,10 +41,26 @@ class CustomProvider extends Base
         }
     }
 
-
-    public function product()
+    protected function generate()
     {
+        $size = count(self::$productNames);
+        return rand(0, $size - 1);
+    }
 
+    public function product(): array
+    {
+        static $holder = [];
+        $randomIndex = $this->generate();
+        do {
+            if (in_array($randomIndex, $holder)) {
+                $randomIndex = $this->generate();
+            }
+
+        } while (in_array($randomIndex, $holder));
+
+        $holder[$randomIndex] = $randomIndex;
+
+        return self::$productNames[$randomIndex];
     }
 
     public function name()

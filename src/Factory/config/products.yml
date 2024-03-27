@@ -1,5 +1,6 @@
 products:
     - name: "Sleek and Modern Laptop Backpack"
+      sku: 283854
       description:
         Elevate your professional style with our sleek and modern laptop backpack.
         Crafted from durable materials, this backpack features multiple compartments
@@ -14,6 +15,7 @@ products:
         - Navy Blue
 
     - name: "Genuine Leather Laptop Sleeve"
+      sku: 63443654
       description: >
         Protect your valuable devices in style with our genuine leather laptop sleeve.
         Handcrafted from premium leather, this sleeve offers superior protection
@@ -27,6 +29,7 @@ products:
         - Tan
 
     - name: "Infinity Edge Gaming Mouse"
+      sku: 656455
       description: >
         Dominate the virtual battlefield with our precision gaming mouse featuring
         an infinity edge design. Engineered for performance, this mouse offers
@@ -39,6 +42,7 @@ products:
         - Black
         - White
     - name: "Whispering Winds Aromatherapy Diffuser"
+      sku: 854642
       description:
         Transform your home into a tranquil oasis with our whispering winds aromatherapy diffuser.
         This elegantly designed diffuser releases a fine mist of essential oils, filling your space
@@ -52,6 +56,7 @@ products:
         - Wood Grain
 
     - name: "Heavenly Hybrid Mattress Topper"
+      sku: 138357
       description: >
         Upgrade your sleep experience with our heavenly hybrid mattress topper.
         Crafted from a blend of memory foam and down alternative fill, this topper
@@ -65,6 +70,7 @@ products:
         - Gray
 
     - name: "Galactic Glow LED Desk Lamp"
+      sku: 834899
       description: >
         Illuminate your workspace with our galactic glow LED desk lamp.
         Featuring adjustable brightness levels and color temperatures,
@@ -79,6 +85,7 @@ products:
         - Silver
 
     - name: "Elite Elegance Dress Watch"
+      sku: 1963422
       description: >
         Make a statement with our elite elegance dress watch.
         Crafted with precision and attention to detail, this watch features
@@ -93,6 +100,7 @@ products:
         - Brown/Gold
 
     - name: "Serene Seascape Wall Art"
+      sku: 118454511
       description: >
         Bring the beauty of the ocean into your home with our serene seascape wall art.
         Printed on high-quality canvas, this artwork captures the tranquility of the sea
@@ -106,6 +114,7 @@ products:
         - Green
 
     - name: "Eco-Friendly Bamboo Cutting Board"
+      sku: 6773456
       description: >
         Make eco-friendly choices in the kitchen with our bamboo cutting board.
         Crafted from sustainable bamboo, this cutting board is not only environmentally
@@ -120,6 +129,7 @@ products:
         - Dark Bamboo
 
     - name: "Alpine Adventure Hiking Boots"
+      sku: 4364868
       description: >
         Conquer any terrain with our alpine adventure hiking boots.
         Designed for rugged trails and outdoor adventures, these boots
@@ -134,3 +144,167 @@ products:
       available_colors:
         - Brown
         - Gray
+    - name: "Infinity Edge Gaming Mouse"
+      sku: 656455
+      description: >
+        Dominate the virtual battlefield with our precision gaming mouse featuring
+        an infinity edge design. Engineered for performance, this mouse offers
+        responsive tracking and customizable buttons to suit your gaming style.
+        The ergonomic design ensures comfort during long gaming sessions, while
+        the RGB lighting adds a stylish touch to your setup. With its sleek and
+        futuristic design, this gaming mouse is a must-have for serious gamers.
+      price: 49.99
+      available_colors:
+        - Black
+        - White
+    - name: "Apex Precision Gaming Mouse"
+      sku: 754321
+      description: >
+        Elevate your gaming experience with the Apex Precision Gaming Mouse. Designed
+        for the competitive gamer, this mouse delivers unparalleled accuracy and
+        responsiveness. Customize your gameplay with programmable buttons and
+        adjustable DPI settings. Its ergonomic design ensures comfort during long
+        gaming sessions, while the sleek metallic finish adds a touch of elegance
+        to your setup.
+      price: 59.99
+      available_colors:
+        - Red
+        - Blue
+    - name: "Xtreme Pro Gaming Mouse"
+      sku: 843576
+      description: >
+        Unleash your gaming potential with the Xtreme Pro Gaming Mouse. Engineered
+        for maximum performance, this mouse features ultra-fast tracking and
+        customizable buttons for a personalized gaming experience. Its ergonomic
+        design provides comfort and support during intense gaming sessions, while
+        the vibrant LED lighting adds a dynamic flair to your setup.
+      price: 39.99
+      available_colors:
+        - Black
+        - Green
+    - name: "Stealth Elite Gaming Mouse"
+      sku: 946782
+      description: >
+        Dominate your opponents with the Stealth Elite Gaming Mouse. Featuring
+        advanced precision tracking and customizable buttons, this mouse is designed
+        for competitive gaming. Its ergonomic shape ensures comfort during extended
+        gaming sessions, while the sleek matte finish adds a touch of sophistication
+        to your setup. Get ready to take your gaming to the next level.
+      price: 54.99
+      available_colors:
+        - Gray
+        - Blue
+    - name: "Velocity Gaming Mouse"
+      sku: 539281
+      description: >
+        Accelerate your gameplay with the Velocity Gaming Mouse. Engineered for
+        speed and precision, this mouse features responsive tracking and adjustable
+        DPI settings. Customize your setup with programmable buttons and RGB lighting
+        effects. With its ergonomic design and sleek profile, the Velocity Gaming
+        Mouse is the perfect choice for gamers seeking a competitive edge.
+      price: 44.99
+      available_colors:
+        - Black
+        - Yellow
+    - name: "Pulse Pro Gaming Mouse"
+      sku: 623847
+      description: >
+        Experience pulse-pounding action with the Pulse Pro Gaming Mouse. Designed
+        for performance and style, this mouse features ultra-responsive tracking
+        and customizable buttons for personalized gameplay. Its ergonomic shape
+        provides comfort during long gaming sessions, while the dynamic RGB lighting
+        creates an immersive gaming atmosphere. Get ready to unleash your inner
+        champion.
+      price: 49.99
+      available_colors:
+        - Black
+        - Purple
+    - name: "Nova Precision Gaming Mouse"
+      sku: 786432
+      description: >
+        Discover a new level of precision with the Nova Precision Gaming Mouse. 
+        Engineered for accuracy and speed, this mouse features advanced tracking
+        technology and customizable buttons for personalized gameplay. Its ergonomic
+        design ensures comfort during long gaming sessions, while the sleek metallic
+        finish adds a touch of style to your setup. Dominate the competition with
+        the Nova Precision Gaming Mouse.
+      price: 59.99
+      available_colors:
+        - Silver
+        - Gold
+    - name: "Aurora Elite Gaming Mouse"
+      sku: 587324
+      description: >
+        Illuminate your gaming experience with the Aurora Elite Gaming Mouse. 
+        Featuring vibrant RGB lighting and customizable effects, this mouse adds
+        a stunning visual element to your setup. Engineered for performance, it
+        offers precise tracking and customizable buttons for a personalized gaming
+        experience. With its ergonomic design and sleek profile, the Aurora Elite
+        Gaming Mouse is the perfect choice for gamers who demand excellence.
+      price: 69.99
+      available_colors:
+        - Black
+        - Pink
+    - name: "RapidFire Gaming Mouse"
+      sku: 234567
+      description: >
+        Get ready for rapid-fire action with the RapidFire Gaming Mouse. Designed
+        for speed and precision, this mouse features ultra-responsive tracking and
+        adjustable DPI settings. Customize your gameplay with programmable buttons
+        and dynamic RGB lighting effects. Its ergonomic design provides comfort
+        during long gaming sessions, while the sleek matte finish adds a touch of
+        style to your setup.
+      price: 49.99
+      available_colors:
+        - Black
+        - Orange
+    - name: "Titanium Gaming Mouse"
+      sku: 452176
+      description: >
+        Dominate the battlefield with the Titanium Gaming Mouse. Engineered for
+        precision and performance, this mouse features advanced tracking technology
+        and customizable buttons for personalized gameplay. Its ergonomic design
+        ensures comfort during long gaming sessions, while the metallic finish adds
+        a touch of style to your setup. Elevate your gaming experience with the
+        Titanium Gaming Mouse.
+      price: 64.99
+      available_colors:
+        - Gray
+        - Cyan
+    - name: "Fusion Pro Gaming Mouse"
+      sku: 874392
+      description: >
+        Experience the fusion of performance and style with the Fusion Pro Gaming
+        Mouse. Engineered for precision tracking and customizable buttons, this
+        mouse offers unparalleled control in the heat of battle. Its ergonomic design
+        ensures comfort during long gaming sessions, while the dynamic RGB lighting
+        adds a touch of flair to your setup. Get ready to dominate the competition.
+      price: 54.99
+      available_colors:
+        - Black
+        - Teal
+    - name: "HyperDrive Gaming Mouse"
+      sku: 342156
+      description: >
+        Take your gaming to the next level with the HyperDrive Gaming Mouse. Featuring
+        lightning-fast tracking and customizable buttons, this mouse is designed
+        for performance and precision. Its ergonomic shape provides comfort during
+        extended gaming sessions, while the sleek metallic finish adds a touch of
+        style to your setup. Get ready to conquer the virtual battlefield.
+      price: 59.99
+      available_colors:
+        - Black
+        - Lime
+    - name: "Phantom Precision Gaming Mouse"
+      sku: 625784
+      description: >
+        Unleash the power of the Phantom Precision Gaming Mouse. Engineered for
+        precision and speed, this mouse features advanced tracking technology and
+        customizable buttons for personalized gameplay. Its ergonomic design ensures
+        comfort during long gaming sessions, while the sleek matte finish adds a
+        touch of sophistication to your setup. Dominate your opponents with the
+        Phantom Precision Gaming Mouse.
+      price: 49.99
+      available_colors:
+        - Black
+        - Red
