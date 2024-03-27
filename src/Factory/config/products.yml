@@ -1,0 +1,136 @@
+products:
+    - name: "Sleek and Modern Laptop Backpack"
+      description:
+        Elevate your professional style with our sleek and modern laptop backpack.
+        Crafted from durable materials, this backpack features multiple compartments
+        to keep your laptop, tablet, and essentials organized and easily accessible.
+        With padded straps and a ventilated back panel, it provides comfort during
+        long commutes or travels. Whether you're heading to the office, campus,
+        or a business trip, this backpack is the perfect blend of style and functionality.
+      price: 59.99
+      available_colors:
+        - Black
+        - Gray
+        - Navy Blue
+
+    - name: "Genuine Leather Laptop Sleeve"
+      description: >
+        Protect your valuable devices in style with our genuine leather laptop sleeve.
+        Handcrafted from premium leather, this sleeve offers superior protection
+        against scratches, bumps, and spills while exuding sophistication. The soft
+        interior lining prevents scratches, while the sleek design adds a touch of
+        elegance to your ensemble. Whether you're heading to a meeting or a coffee
+        shop, carry your laptop with confidence in this luxurious sleeve.
+      price: 39.99
+      available_colors:
+        - Brown
+        - Tan
+
+    - name: "Infinity Edge Gaming Mouse"
+      description: >
+        Dominate the virtual battlefield with our precision gaming mouse featuring
+        an infinity edge design. Engineered for performance, this mouse offers
+        responsive tracking and customizable buttons to suit your gaming style.
+        The ergonomic design ensures comfort during long gaming sessions, while
+        the RGB lighting adds a stylish touch to your setup. With its sleek and
+        futuristic design, this gaming mouse is a must-have for serious gamers.
+      price: 49.99
+      available_colors:
+        - Black
+        - White
+    - name: "Whispering Winds Aromatherapy Diffuser"
+      description:
+        Transform your home into a tranquil oasis with our whispering winds aromatherapy diffuser.
+        This elegantly designed diffuser releases a fine mist of essential oils, filling your space
+        with soothing aromas that promote relaxation and well-being. With its sleek and modern
+        design, it's the perfect addition to any room. Whether you're unwinding after a long day
+        or practicing mindfulness, let the whispering winds diffuser create a serene atmosphere
+        in your home.
+      price: 29.99
+      available_colors:
+        - White
+        - Wood Grain
+
+    - name: "Heavenly Hybrid Mattress Topper"
+      description: >
+        Upgrade your sleep experience with our heavenly hybrid mattress topper.
+        Crafted from a blend of memory foam and down alternative fill, this topper
+        provides the perfect balance of plush comfort and support. The breathable
+        design promotes airflow and regulates temperature for a cool and comfortable
+        night's sleep. Transform your mattress into a luxurious retreat and wake
+        up feeling refreshed and rejuvenated every morning.
+      price: 79.99
+      available_colors:
+        - White
+        - Gray
+
+    - name: "Galactic Glow LED Desk Lamp"
+      description: >
+        Illuminate your workspace with our galactic glow LED desk lamp.
+        Featuring adjustable brightness levels and color temperatures,
+        this lamp provides customized lighting to suit your needs. The sleek
+        and modern design adds a futuristic touch to your desk, while the
+        built-in USB port allows for convenient device charging. Whether
+        you're working late or studying for exams, the galactic glow desk
+        lamp keeps your workspace bright and stylish.
+      price: 34.99
+      available_colors:
+        - Black
+        - Silver
+
+    - name: "Elite Elegance Dress Watch"
+      description: >
+        Make a statement with our elite elegance dress watch.
+        Crafted with precision and attention to detail, this watch features
+        a stainless steel case and a luxurious leather strap. The minimalist
+        dial design exudes sophistication, making it the perfect accessory
+        for any occasion. With its Swiss quartz movement, you can trust
+        this watch to keep accurate time while adding a touch of refinement
+        to your ensemble.
+      price: 99.99
+      available_colors:
+        - Black/Silver
+        - Brown/Gold
+
+    - name: "Serene Seascape Wall Art"
+      description: >
+        Bring the beauty of the ocean into your home with our serene seascape wall art.
+        Printed on high-quality canvas, this artwork captures the tranquility of the sea
+        with its soft colors and serene imagery. Whether you hang it in your living room,
+        bedroom, or office, it will instantly enhance the ambiance of any space. Escape
+        the stresses of daily life and immerse yourself in the calming beauty of our
+        serene seascape wall art.
+      price: 49.99
+      available_colors:
+        - Blue
+        - Green
+
+    - name: "Eco-Friendly Bamboo Cutting Board"
+      description: >
+        Make eco-friendly choices in the kitchen with our bamboo cutting board.
+        Crafted from sustainable bamboo, this cutting board is not only environmentally
+        friendly but also durable and resistant to knife marks. The natural antibacterial
+        properties of bamboo make it a hygienic choice for food preparation, while the
+        reversible design provides versatility for cutting and serving. Upgrade your
+        kitchen essentials with our eco-friendly bamboo cutting board and make a positive
+        impact on the planet.
+      price: 19.99
+      available_colors:
+        - Natural Bamboo
+        - Dark Bamboo
+
+    - name: "Alpine Adventure Hiking Boots"
+      description: >
+        Conquer any terrain with our alpine adventure hiking boots.
+        Designed for rugged trails and outdoor adventures, these boots
+        feature waterproof construction and durable materials to keep
+        your feet dry and comfortable in any weather conditions. The
+        supportive midsole and grippy outsole provide stability and
+        traction on uneven terrain, while the padded collar and cushioned
+        footbed ensure all-day comfort. Whether you're hiking through
+        forests, scaling mountains, or exploring remote trails, trust
+        our alpine adventure hiking boots to take you there.
+      price: 89.99
+      available_colors:
+        - Brown
+        - Gray

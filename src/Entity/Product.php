@@ -14,24 +14,23 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'products')]
 class Product
 {
+    use TimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    private string $sku;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
     #[ORM\Column(type: 'string', nullable: false)]
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: "text", nullable: true)]
     private ?string $longDescription = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     private Collection $categories;
@@ -39,10 +38,14 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Variant::class, orphanRemoval: true)]
     private Collection $variant;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Cart::class, orphanRemoval: true)]
+    private Collection $carts;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->variant = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     /**
@@ -51,6 +54,18 @@ class Product
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getSku(): ?string
+    {
+        return $this->sku;
+    }
+
+    public function setSku(string $sku): self
+    {
+        $this->sku = $sku;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -73,30 +88,6 @@ class Product
     public function setLongDescription(?string $longDescription): static
     {
         $this->longDescription = $longDescription;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -161,6 +152,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($variant->getProduct() === $this) {
                 $variant->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): static
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts->add($cart);
+            $cart->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): static
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getProduct() === $this) {
+                $cart->setProduct(null);
             }
         }
 

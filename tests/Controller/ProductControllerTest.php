@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test\Controller;
+namespace App\Tests\Controller;
 
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,35 +41,28 @@ class ProductControllerTest extends WebTestCase
 
     public function testNew(): void
     {
-        $this->markTestIncomplete();
+        //$this->markTestIncomplete();
         $this->client->request('GET', sprintf('%snew', $this->path));
 
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Save', [
             'product[name]' => 'Testing',
-            'product[slug]' => 'Testing',
             'product[longDescription]' => 'Testing',
-            'product[createdAt]' => 'Testing',
-            'product[updatedAt]' => 'Testing',
-            'product[categories]' => 'Testing',
         ]);
 
-        self::assertResponseRedirects('/sweet/food/');
+        //self::assertResponseRedirects('/sweet/food/');
 
-        self::assertSame(1, $this->getRepository()->count([]));
+        self::assertSame(1, $this->repository->count([]));
     }
 
     public function testShow(): void
     {
-        $this->markTestIncomplete();
+    //  $this->markTestIncomplete();
         $fixture = new Product();
-        $fixture->setName('My Title');
-        $fixture->setSlug('My Title');
+        $fixture->setName('My Title - of course');
+        $fixture->setSlug('my-title');
         $fixture->setLongDescription('My Title');
-        $fixture->setCreatedAt('My Title');
-        $fixture->setUpdatedAt('My Title');
-        $fixture->setCategories('My Title');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -84,14 +77,12 @@ class ProductControllerTest extends WebTestCase
 
     public function testEdit(): void
     {
-        $this->markTestIncomplete();
+        //$this->markTestIncomplete();
         $fixture = new Product();
         $fixture->setName('Value');
-        $fixture->setSlug('Value');
+        $fixture->setSlug('yayyy-value');
         $fixture->setLongDescription('Value');
-        $fixture->setCreatedAt('Value');
-        $fixture->setUpdatedAt('Value');
-        $fixture->setCategories('Value');
+        $fixture->setCreatedAt(new \DateTimeImmutable('now'));
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -102,9 +93,7 @@ class ProductControllerTest extends WebTestCase
             'product[name]' => 'Something New',
             'product[slug]' => 'Something New',
             'product[longDescription]' => 'Something New',
-            'product[createdAt]' => 'Something New',
-            'product[updatedAt]' => 'Something New',
-            'product[categories]' => 'Something New',
+            'product[createdAt]' => '2003-01-09 18:36:51',
         ]);
 
         self::assertResponseRedirects('/product/');
@@ -114,21 +103,20 @@ class ProductControllerTest extends WebTestCase
         self::assertSame('Something New', $fixture[0]->getName());
         self::assertSame('Something New', $fixture[0]->getSlug());
         self::assertSame('Something New', $fixture[0]->getLongDescription());
-        self::assertSame('Something New', $fixture[0]->getCreatedAt());
-        self::assertSame('Something New', $fixture[0]->getUpdatedAt());
-        self::assertSame('Something New', $fixture[0]->getCategories());
     }
 
+    /**
+     * This test is incomplete.
+     * @return void
+     */
     public function testRemove(): void
     {
-        $this->markTestIncomplete();
+       $this->markTestIncomplete();
         $fixture = new Product();
         $fixture->setName('Value');
         $fixture->setSlug('Value');
         $fixture->setLongDescription('Value');
-        $fixture->setCreatedAt('Value');
-        $fixture->setUpdatedAt('Value');
-        $fixture->setCategories('Value');
+        $fixture->setCreatedAt(new \DateTimeImmutable());
 
         $this->manager->remove($fixture);
         $this->manager->flush();

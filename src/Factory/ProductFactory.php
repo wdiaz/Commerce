@@ -4,6 +4,8 @@ namespace App\Factory;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Faker\Factory;
+use Faker\Provider\Base;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -11,37 +13,6 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Product>
  *
- * @method        Product|Proxy                     create(array|callable $attributes = [])
- * @method static Product|Proxy                     createOne(array $attributes = [])
- * @method static Product|Proxy                     find(object|array|mixed $criteria)
- * @method static Product|Proxy                     findOrCreate(array $attributes)
- * @method static Product|Proxy                     first(string $sortedField = 'id')
- * @method static Product|Proxy                     last(string $sortedField = 'id')
- * @method static Product|Proxy                     random(array $attributes = [])
- * @method static Product|Proxy                     randomOrCreate(array $attributes = [])
- * @method static ProductRepository|RepositoryProxy repository()
- * @method static Product[]|Proxy[]                 all()
- * @method static Product[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
- * @method static Product[]|Proxy[]                 createSequence(iterable|callable $sequence)
- * @method static Product[]|Proxy[]                 findBy(array $attributes)
- * @method static Product[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
- * @method static Product[]|Proxy[]                 randomSet(int $number, array $attributes = [])
- *
- * @phpstan-method        Proxy<Product> create(array|callable $attributes = [])
- * @phpstan-method static Proxy<Product> createOne(array $attributes = [])
- * @phpstan-method static Proxy<Product> find(object|array|mixed $criteria)
- * @phpstan-method static Proxy<Product> findOrCreate(array $attributes)
- * @phpstan-method static Proxy<Product> first(string $sortedField = 'id')
- * @phpstan-method static Proxy<Product> last(string $sortedField = 'id')
- * @phpstan-method static Proxy<Product> random(array $attributes = [])
- * @phpstan-method static Proxy<Product> randomOrCreate(array $attributes = [])
- * @phpstan-method static RepositoryProxy<Product> repository()
- * @phpstan-method static list<Proxy<Product>> all()
- * @phpstan-method static list<Proxy<Product>> createMany(int $number, array|callable $attributes = [])
- * @phpstan-method static list<Proxy<Product>> createSequence(iterable|callable $sequence)
- * @phpstan-method static list<Proxy<Product>> findBy(array $attributes)
- * @phpstan-method static list<Proxy<Product>> randomRange(int $min, int $max, array $attributes = [])
- * @phpstan-method static list<Proxy<Product>> randomSet(int $number, array $attributes = [])
  */
 final class ProductFactory extends ModelFactory
 {
@@ -62,11 +33,14 @@ final class ProductFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $faker = Factory::create();
+        $faker->addProvider(new CustomProvider($faker));
+
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => self::faker()->name(),
-            'slug'  => self::faker()->name(),
-            'long_description' => self::faker()->text(maxNbChars: 200)
+            'name' => $faker->name(),// self::faker()->name(),
+            'sku' => self::faker()->randomNumber(5),
+            'long_description' => $faker->description(),//self::faker()->text(maxNbChars: 200)
         ];
     }
 
