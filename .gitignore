@@ -11,6 +11,7 @@
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+./idea
 
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
