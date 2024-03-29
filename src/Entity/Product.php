@@ -38,14 +38,11 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Variant::class, orphanRemoval: true)]
     private Collection $variant;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Cart::class, orphanRemoval: true)]
-    private Collection $carts;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->variant = new ArrayCollection();
-        $this->carts = new ArrayCollection();
     }
 
     /**
@@ -152,36 +149,6 @@ class Product
             // set the owning side to null (unless already changed)
             if ($variant->getProduct() === $this) {
                 $variant->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Cart>
-     */
-    public function getCarts(): Collection
-    {
-        return $this->carts;
-    }
-
-    public function addCart(Cart $cart): static
-    {
-        if (!$this->carts->contains($cart)) {
-            $this->carts->add($cart);
-            $cart->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCart(Cart $cart): static
-    {
-        if ($this->carts->removeElement($cart)) {
-            // set the owning side to null (unless already changed)
-            if ($cart->getProduct() === $this) {
-                $cart->setProduct(null);
             }
         }
 
