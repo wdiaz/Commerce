@@ -3,12 +3,8 @@
 namespace App\Factory;
 
 use App\Entity\Product;
-use App\Repository\ProductRepository;
 use Faker\Factory;
-use Faker\Provider\Base;
 use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
-use Zenstruck\Foundry\RepositoryProxy;
 
 /**
  * @extends ModelFactory<Product>
