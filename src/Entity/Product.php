@@ -38,11 +38,15 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Variant::class, orphanRemoval: true)]
     private Collection $variant;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, orphanRemoval: true)]
+    private Collection $images;
+
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->variant = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -53,11 +57,18 @@ class Product
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSku(): ?string
     {
         return $this->sku;
     }
 
+    /**
+     * @param string $sku
+     * @return $this
+     */
     public function setSku(string $sku): self
     {
         $this->sku = $sku;
@@ -65,11 +76,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): static
     {
         $this->name = $name;
@@ -77,11 +95,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLongDescription(): ?string
     {
         return $this->longDescription;
     }
 
+    /**
+     * @param string|null $longDescription
+     * @return $this
+     */
     public function setLongDescription(?string $longDescription): static
     {
         $this->longDescription = $longDescription;
@@ -89,11 +114,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param string|null $slug
+     * @return $this
+     */
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
@@ -109,6 +141,10 @@ class Product
         return $this->categories;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function addCategory(Category $category): static
     {
         if (!$this->categories->contains($category)) {
@@ -118,6 +154,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function removeCategory(Category $category): static
     {
         $this->categories->removeElement($category);
@@ -133,6 +173,10 @@ class Product
         return $this->variant;
     }
 
+    /**
+     * @param Variant $variant
+     * @return $this
+     */
     public function addVariant(Variant $variant): static
     {
         if (!$this->variant->contains($variant)) {
@@ -143,12 +187,52 @@ class Product
         return $this;
     }
 
+    /**
+     * @param Variant $variant
+     * @return $this
+     */
     public function removeVariant(Variant $variant): static
     {
         if ($this->variant->removeElement($variant)) {
-            // set the owning side to null (unless already changed)
             if ($variant->getProduct() === $this) {
                 $variant->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param Image $image
+     * @return $this
+     */
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Image $image
+     * @return $this
+     */
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
             }
         }
 
