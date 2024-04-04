@@ -2,3 +2,18 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
+
+    filter_sets:
+
+        # name our filter set "my_thumb_filter"
+        squared_thumbnail_small:
+            filters:
+
+                # use and setup the "thumbnail" filter
+                thumbnail:
+
+                    # set the thumbnail size to "32x32" pixels
+                    size: [200, 200]
+
+                    # crop the input image, if required
+                    mode: outbound

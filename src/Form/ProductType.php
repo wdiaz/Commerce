@@ -41,7 +41,7 @@ class ProductType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-                'attr' => ['class' => 'js-example-basic-single'],
+                'attr' => ['class' => 'js-product-categories'],
                 'expanded' => false,
             ])
         ;

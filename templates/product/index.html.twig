@@ -9,7 +9,9 @@
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>Id</th>
+                <th>Sku</th>
                 <th>Name</th>
                 <th>Slug</th>
                 <th>LongDescription</th>
@@ -22,6 +24,12 @@
         {% for product in products %}
             <tr>
                 <td>{{ product.id }}</td>
+                <td> {% if product.mainImage is not null %}
+                        <img src="{{ asset(product.imagePath)|imagine_filter('squared_thumbnail_small')  }}" alt="">
+                    {% endif %}
+
+                </td>
+                <td>{{ product.sku }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.slug }}</td>
                 <td>{{ product.longDescription }}</td>

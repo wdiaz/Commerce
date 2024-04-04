@@ -274,4 +274,10 @@ class Product
     {
         return $this->imageFile;
     }
+
+
+    public function getImagePath()
+    {
+        return 'images/products/' . $this->getMainImage();
+    }
 }
