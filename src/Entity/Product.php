@@ -24,7 +24,7 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: "string", length: 255, unique: true)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private string $sku;
 
     #[ORM\Column(length: 255)]
@@ -32,7 +32,7 @@ class Product
     #[ORM\Column(type: 'string', nullable: false)]
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
-    #[ORM\Column(type: "text", nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $longDescription = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
@@ -57,24 +57,17 @@ class Product
         $this->images = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSku(): ?string
     {
         return $this->sku;
     }
 
     /**
-     * @param string $sku
      * @return $this
      */
     public function setSku(string $sku): self
@@ -84,16 +77,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
      * @return $this
      */
     public function setName(string $name): static
@@ -103,16 +92,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLongDescription(): ?string
     {
         return $this->longDescription;
     }
 
     /**
-     * @param string|null $longDescription
      * @return $this
      */
     public function setLongDescription(?string $longDescription): static
@@ -122,16 +107,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @param string|null $slug
      * @return $this
      */
     public function setSlug(?string $slug): static
@@ -150,7 +131,6 @@ class Product
     }
 
     /**
-     * @param Category $category
      * @return $this
      */
     public function addCategory(Category $category): static
@@ -163,7 +143,6 @@ class Product
     }
 
     /**
-     * @param Category $category
      * @return $this
      */
     public function removeCategory(Category $category): static
@@ -182,7 +161,6 @@ class Product
     }
 
     /**
-     * @param Variant $variant
      * @return $this
      */
     public function addVariant(Variant $variant): static
@@ -196,7 +174,6 @@ class Product
     }
 
     /**
-     * @param Variant $variant
      * @return $this
      */
     public function removeVariant(Variant $variant): static
@@ -219,7 +196,6 @@ class Product
     }
 
     /**
-     * @param Image $image
      * @return $this
      */
     public function addImage(Image $image): static
@@ -233,7 +209,6 @@ class Product
     }
 
     /**
-     * @param Image $image
      * @return $this
      */
     public function removeImage(Image $image): static
@@ -275,9 +250,8 @@ class Product
         return $this->imageFile;
     }
 
-
     public function getImagePath()
     {
-        return 'images/products/' . $this->getMainImage();
+        return 'images/products/'.$this->getMainImage();
     }
 }
