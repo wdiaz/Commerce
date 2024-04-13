@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 #[ApiResource(
-    description: "Main Cart Entity Holder",
+    description: 'Main Cart Entity Holder',
     operations: [
         new GetCollection(),
         new Post(),
@@ -37,7 +37,7 @@ class Cart
     #[ORM\ManyToOne(inversedBy: 'carts')]
     private ?User $cartUser = null;
 
-    #[ORM\OneToMany(mappedBy: "cart", targetEntity: CartItem::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartItem::class, cascade: ['persist', 'remove'])]
     private Collection $cartItems;
 
     public function __construct()
