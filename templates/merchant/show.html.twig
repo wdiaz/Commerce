@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Merchant{% endblock %}
+
+{% block body %}
+    <h1>Merchant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ merchant.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ merchant.name }}</td>
+            </tr>
+            <tr>
+                <th>Uuid</th>
+                <td>{{ merchant.uuid }}</td>
+            </tr>
+            <tr>
+                <th>LocationX</th>
+                <td>{{ merchant.locationX }}</td>
+            </tr>
+            <tr>
+                <th>LocationY</th>
+                <td>{{ merchant.locationY }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_merchant_index') }}">back to list</a>
+
+    <a href="{{ path('app_merchant_edit', {'id': merchant.id}) }}">edit</a>
+
+    {{ include('merchant/_delete_form.html.twig') }}
+{% endblock %}

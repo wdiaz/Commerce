@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\Put;
 use App\Repository\CartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
@@ -34,11 +35,17 @@ class Cart
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(type: Types::GUID, unique: true)]
+    private ?string $uuid = null;
+
     #[ORM\ManyToOne(inversedBy: 'carts')]
     private ?User $cartUser = null;
 
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartItem::class, cascade: ['persist', 'remove'])]
     private Collection $cartItems;
+
+    #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
+    private ?string $session = null;
 
     public function __construct()
     {
@@ -88,6 +95,30 @@ class Cart
                 $cartItem->setCart(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): static
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function getSession(): ?string
+    {
+        return $this->session;
+    }
+
+    public function setSession(string $session): static
+    {
+        $this->session = $session;
 
         return $this;
     }
