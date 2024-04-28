@@ -12,9 +12,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ *
+ */
 #[Route('/product')]
 class ProductController extends AbstractController
 {
+    /**
+     * @param ProductRepository $productRepository
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
@@ -23,6 +31,12 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request                $request
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
+     */
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -33,6 +47,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($product);
             $entityManager->flush();
+
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -42,6 +57,11 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Product $product
+     *
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
@@ -50,6 +70,13 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request                $request
+     * @param Product                $product
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
@@ -58,6 +85,7 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -67,6 +95,13 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request                $request
+     * @param Product                $product
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
