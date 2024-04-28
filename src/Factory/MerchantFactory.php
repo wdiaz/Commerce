@@ -32,8 +32,7 @@ final class MerchantFactory extends ModelFactory
         return [
             'locationX' => self::faker()->randomFloat(),
             'locationY' => self::faker()->randomFloat(),
-            'name' => self::faker()->text(15),
-            'slug' => self::faker()->text(),
+            'name' => self::faker()->text(50),
             'uuid' => UuidV4::v4(),
         ];
     }
