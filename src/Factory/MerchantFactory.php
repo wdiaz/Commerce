@@ -10,7 +10,6 @@ use Zenstruck\Foundry\ModelFactory;
  * @extends ModelFactory<Merchant>
  *
  **/
-
 final class MerchantFactory extends ModelFactory
 {
     /**
@@ -33,9 +32,9 @@ final class MerchantFactory extends ModelFactory
         return [
             'locationX' => self::faker()->randomFloat(),
             'locationY' => self::faker()->randomFloat(),
-            'name' => self::faker()->text(255),
+            'name' => self::faker()->text(15),
             'slug' => self::faker()->text(),
-            'uuid' => UuidV4::v4()
+            'uuid' => UuidV4::v4(),
         ];
     }
 
