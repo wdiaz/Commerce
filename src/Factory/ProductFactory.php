@@ -8,7 +8,6 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<Product>
- *
  */
 final class ProductFactory extends ModelFactory
 {
@@ -32,11 +31,12 @@ final class ProductFactory extends ModelFactory
         $faker = Factory::create();
         $faker->addProvider(new CustomProvider($faker));
         $product = $faker->product();
+
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => $product['name'], //$faker->name(),
-            'sku' => $product['sku'], //self::faker()->randomNumber(5),
-            'long_description' => $product['description'] //$faker->description(),
+            'name' => $product['name'], // $faker->name(),
+            'sku' => $product['sku'], // self::faker()->randomNumber(5),
+            'long_description' => $product['description'], // $faker->description(),
         ];
     }
 
