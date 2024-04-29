@@ -13,7 +13,7 @@ class CategoryFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        $category = CategoryFactory::createOne();
+        $category = CategoryFactory::createMany(10);
 
         $manager->flush();
     }
