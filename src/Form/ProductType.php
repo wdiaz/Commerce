@@ -34,7 +34,7 @@ class ProductType extends AbstractType
             ])*/
 
             ->add('imageFile', VichFileType::class, [
-                'required'   => false
+                'required' => false,
             ])
             ->add('longDescription')
             ->add('categories', EntityType::class, [
