@@ -12,7 +12,7 @@ const RelatedProducts = () => {
 
     useEffect(() => {
         const relatedProducts = async () => {
-            fetch('https://ox.local/api/products?itemsPerPage=5')
+            fetch('/api/products?itemsPerPage=5')
                 .then(response => response.json())
                 .then(data => setProducts(data['hydra:member']))
                 .catch(error => console.error('Error fetching products:', error));
@@ -34,7 +34,5 @@ const RelatedProducts = () => {
 export default RelatedProducts;
 
 root.render(
-    <React.StrictMode>
         <RelatedProducts />
-    </React.StrictMode>
 );

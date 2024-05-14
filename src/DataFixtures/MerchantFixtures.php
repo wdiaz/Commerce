@@ -2,8 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Merchant;
-use App\Factory\CategoryFactory;
 use App\Factory\MerchantFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
