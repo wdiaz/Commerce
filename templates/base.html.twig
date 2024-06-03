@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
@@ -18,13 +19,9 @@
             <img src="{{ asset('images/parts/logo.png') }}" alt="Logo" class="h-8">
         </div>
         <!-- Search Bar -->
-        <div class="flex-1 mx-6">
-            <input type="text" placeholder="Search for products" class="w-full px-4 py-2 border rounded-md">
-            <div {{ react_component('SearchBar', {
-                packages: ["Hello", "World"]
-            }) }}>
-                Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
-            </div>
+
+        <div {{ react_component('Search') }}>
+            Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
         </div>
         <!-- Cart -->
         <div class="flex items-center">
@@ -66,6 +63,7 @@
     </div>
 </footer>
 {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
