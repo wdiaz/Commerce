@@ -16,7 +16,7 @@
     <div class="flex justify-between items-center px-6 py-4">
         <!-- Logo -->
         <div class="flex items-center">
-            <img src="{{ asset('images/parts/logo.png') }}" alt="Logo" class="h-8">
+            <a href="/"> <img src="{{ asset('images/parts/logo.png') }}" alt="Logo" class="h-8"></a>
         </div>
         <!-- Search Bar -->
 
@@ -44,15 +44,13 @@
         </nav>
     </div>
 </header>
-
-<!-- Content -->
+<body><!-- Content -->
 <main class="container mx-auto py-8">
     <div class="bg-white p-6 rounded-md shadow">
-        <body>
         {% block body %}
 
         {% endblock %}
-        </body>
+
     </div>
 </main>
 
@@ -62,8 +60,8 @@
         <p>&copy; 2024 Ox Marketplace. All rights reserved.</p>
     </div>
 </footer>
+</body>
 {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
