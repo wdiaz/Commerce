@@ -1,18 +1,70 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
+</head>
+<body class="bg-gray-100">
+
+<!-- Header -->
+<header class="shadow bg-gray-800">
+    <div class="flex justify-between items-center px-6 py-4">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <img src="{{ asset('images/parts/logo.png') }}" alt="Logo" class="h-8">
+        </div>
+        <!-- Search Bar -->
+
+        <div {{ react_component('Search') }}>
+            Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+        </div>
+        <!-- Cart -->
+        <div class="flex items-center">
+            <a href="#" class="flex items-center space-x-2 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.5 6H21M7 13l-1.5 7m0 0h13M5.5 20a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM18.5 20a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                </svg>
+                <span>6</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Second Row: Menu -->
+    <div class="bg-white bottom-0.5">
+        <nav class="flex justify-center space-x-4 py-2 text-blue-950">
+            <a href="#" class="hover:underline">Home</a>
+            <a href="#" class="hover:underline">Shop</a>
+            <a href="#" class="hover:underline">About</a>
+            <a href="#" class="hover:underline">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Content -->
+<main class="container mx-auto py-8">
+    <div class="bg-white p-6 rounded-md shadow">
+        <body>
+        {% block body %}
+
+        {% endblock %}
+        </body>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto text-center">
+        <p>&copy; 2024 Ox Marketplace. All rights reserved.</p>
+    </div>
+</footer>
+{% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
 </html>
