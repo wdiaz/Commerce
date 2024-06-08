@@ -33,9 +33,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'cartUser', targetEntity: Cart::class)]
     private Collection $carts;
 
+    #[ORM\Column]
+    private ?bool $isVerified = null;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
+
+        $this->setVerified(false);
     }
 
     public function getId(): ?int
@@ -134,6 +139,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $cart->setCartUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
