@@ -7,17 +7,41 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1 class="text-4xl font-bold text-left text-gray-800 my-4">Register</h1>
 
-    {{ form_errors(registrationForm) }}
+{{ form_start(form, { 'attr' : { 'class': 'max-w-md' } }) }}
+    <div>
+        <div class="mt-1">
+            {{ form_row(form.email, {'attr': {'class': 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2'} }) }}
+        </div>
+    </div>
+    <div class="mt-6">
+        <div class="mt-1">
+            {{ form_row(form.plainPassword, {
+                'attr': {'class': 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2'},
+                'label': 'Password'
+            }
+            ) }}
+        </div>
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <div class="mt-6">
+        <div class="mt-1">
+            {{ form_row(form.agreeTerms, {'attr': {'class': 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2'} }) }}
+        </div>
+    </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
+
+    <div>
+        <button class="flex flex-no-wrap mt-6 border-2 border-black bg-yellow-500 py-2 px-4">
+            <span>{{ button_label|default('Register') }}</span>
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 w-6 h-6"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+        </button>
+
+    </div>
+    {{form_widget(form._token)}}
+    {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}
