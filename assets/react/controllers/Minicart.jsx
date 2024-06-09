@@ -39,8 +39,7 @@ export default function () {
     if (!cartItems) {
         return <div>Loading...</div>;
     }
-    console.log(cartItems);
-    
+
     return (
     <div className="flex items-center">
         <a href="#" className="flex items-center space-x-2 text-white">

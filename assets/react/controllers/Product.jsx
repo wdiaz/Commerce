@@ -1,4 +1,5 @@
 import React from "react";
+import AddToCart from "./AddToCart";
 
 export default function ({product}) {
     const currentProduct = JSON.parse(product);
@@ -15,10 +16,7 @@ export default function ({product}) {
                             </div>
                             <div className="flex -mx-2 mb-4">
                                 <div className="w-1/2 px-2">
-                                    <button
-                                        className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">Add
-                                        to Cart
-                                    </button>
+                                    <AddToCart product={product}/>
                                 </div>
                                 <div className="w-1/2 px-2">
                                     <button
