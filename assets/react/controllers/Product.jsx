@@ -5,7 +5,7 @@ import ProductRatingBar from "./ProductRatingBar";
 export default function ({product}) {
     const currentProduct = JSON.parse(product);
     return (
-        <div>
+        <div className="mt-4">
             <div className="bg-white-100 light:bg-gray-800 py-8">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row -mx-4">
