@@ -1,17 +1,23 @@
 import React from "react";
 export default function ({product})
 {
-    const handleAddToCart = () => {
+    const currentProduct = JSON.parse(product);
 
-        // Replace this URL with your actual endpoint
+    const handleAddToCart = () => {
         const url = 'https://ox.local/api/cart_items';
+        const cartItem = {
+            "quantity": 3,
+            "product": "/api/products/" + currentProduct.id,
+            "price": 33,
+            "cart": "/api/carts/7"
+        };
 
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ product }),
+            body: JSON.stringify(cartItem),
         })
             .then(response => {
                 if (!response.ok) {
