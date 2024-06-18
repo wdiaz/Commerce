@@ -32,17 +32,17 @@ class Cart
 {
     use TimestampableTrait;
 
-    const ACTIVE = 'active';
+    public const ACTIVE = 'active';
 
-    const INACTIVE = 'inactive';
+    public const INACTIVE = 'inactive';
 
-    const ABANDONED = 'abandoned';
+    public const ABANDONED = 'abandoned';
 
-    const COMPLETED = 'completed';
+    public const COMPLETED = 'completed';
 
-    const PROCESSING = 'processing';
+    public const PROCESSING = 'processing';
 
-    const PROCESSED = 'processed';
+    public const PROCESSED = 'processed';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
