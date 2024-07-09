@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
 use App\Repository\CartItemRepository;
+use App\State\ProductToCartItemProcessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
@@ -12,6 +14,8 @@ use Symfony\Component\Serializer\Attribute\Groups;
     normalizationContext: ['groups' => ['cart_item:read']],
     denormalizationContext: ['groups' => ['cart_item:write']],
 )]
+
+#[Post(processor: ProductToCartItemProcessor::class)]
 class CartItem
 {
     use TimestampableTrait;
@@ -38,6 +42,11 @@ class CartItem
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['cart_item:read', 'cart_item:write'])]
     private Cart $cart;
+
+    #[ORM\ManyToOne(inversedBy: 'cartItems')]
+    #[ORM\JoinColumn(referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[Groups(['cart_item:read', 'cart_item:write'])]
+    private ?Merchant $merchant = null;
 
     public function getId(): ?int
     {
@@ -88,6 +97,18 @@ class CartItem
     public function setCart(?Cart $cart): static
     {
         $this->cart = $cart;
+
+        return $this;
+    }
+
+    public function getMerchant(): ?Merchant
+    {
+        return $this->merchant;
+    }
+
+    public function setMerchant(?Merchant $merchant): static
+    {
+        $this->merchant = $merchant;
 
         return $this;
     }

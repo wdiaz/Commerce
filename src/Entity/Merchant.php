@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\MerchantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -35,9 +37,16 @@ class Merchant
     #[ORM\Column]
     private ?float $locationY = null;
 
+    /**
+     * @var Collection<int, CartItem>
+     */
+    #[ORM\OneToMany(mappedBy: 'merchant', targetEntity: CartItem::class)]
+    private Collection $cartItems;
+
     public function __construct()
     {
         $this->uuid = Uuid::v4();
+        $this->cartItems = new ArrayCollection();
     }
 
 
@@ -102,6 +111,36 @@ class Merchant
     public function setLocationY(float $locationY): static
     {
         $this->locationY = $locationY;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CartItem>
+     */
+    public function getCartItems(): Collection
+    {
+        return $this->cartItems;
+    }
+
+    public function addCartItem(CartItem $cartItem): static
+    {
+        if (!$this->cartItems->contains($cartItem)) {
+            $this->cartItems->add($cartItem);
+            $cartItem->setMerchant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartItem(CartItem $cartItem): static
+    {
+        if ($this->cartItems->removeElement($cartItem)) {
+            // set the owning side to null (unless already changed)
+            if ($cartItem->getMerchant() === $this) {
+                $cartItem->setMerchant(null);
+            }
+        }
 
         return $this;
     }
