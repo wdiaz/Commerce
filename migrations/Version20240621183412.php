@@ -16,7 +16,6 @@ final class Version20240621183412 extends AbstractMigration
     {
         return '';
     }
-
     public function up(Schema $schema): void
     {
         $this->addSql('ALTER TABLE cart_item ADD merchant_id INT NOT NULL');
