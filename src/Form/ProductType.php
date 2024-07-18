@@ -7,7 +7,9 @@ use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +22,9 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('sku', TextType::class)
+            ->add('slug', TextType::class)
+            ->add('createdAt', DateTimeType::class)
+            ->add('updatedAt', DateTimeType::class)
             /*->add('images', CollectionType::class, [
                 'entry_type' => ImageType::class,
                 'prototype' => true,
@@ -36,10 +41,10 @@ class ProductType extends AbstractType
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
             ])
-            ->add('longDescription')
+            ->add('longDescription', TextareaType::class)
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
                 'attr' => ['class' => 'js-product-categories'],
                 'expanded' => false,

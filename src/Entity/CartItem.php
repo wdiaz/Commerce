@@ -3,32 +3,44 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
 use App\Repository\CartItemRepository;
+use App\State\ProductToCartItemProcessor;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CartItemRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['cart_item:read']],
+    denormalizationContext: ['groups' => ['cart_item:write']],
+)]
+
+#[Post(processor: ProductToCartItemProcessor::class)]
 class CartItem
 {
     use TimestampableTrait;
 
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['cart_item:read', 'cart_item:write'])]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['cart_item:read', 'cart_item:write'])]
     private ?Product $product = null;
 
     #[ORM\Column]
+    #[Groups(['cart_item:read', 'cart_item:write'])]
     private ?float $price = null;
 
-    #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: "cartItems")]
+    #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: 'cartItems')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['cart_item:read', 'cart_item:write'])]
     private Cart $cart;
 
     public function getId(): ?int

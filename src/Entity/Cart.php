@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 #[ApiResource(
@@ -30,6 +31,19 @@ use Doctrine\ORM\Mapping as ORM;
 class Cart
 {
     use TimestampableTrait;
+
+    public const ACTIVE = 'active';
+
+    public const INACTIVE = 'inactive';
+
+    public const ABANDONED = 'abandoned';
+
+    public const COMPLETED = 'completed';
+
+    public const PROCESSING = 'processing';
+
+    public const PROCESSED = 'processed';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -47,9 +61,16 @@ class Cart
     #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
     private ?string $session = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->cartItems = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->uuid = Uuid::v4();
+        $this->session = Uuid::v4();
+        $this->status = self::ACTIVE;
     }
 
     public function getId(): ?int
@@ -119,6 +140,18 @@ class Cart
     public function setSession(string $session): static
     {
         $this->session = $session;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
