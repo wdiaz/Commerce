@@ -43,11 +43,6 @@ class CartItem
     #[Groups(['cart_item:read', 'cart_item:write'])]
     private Cart $cart;
 
-    #[ORM\ManyToOne(inversedBy: 'cartItems')]
-    #[ORM\JoinColumn(referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[Groups(['cart_item:read', 'cart_item:write'])]
-    private ?Merchant $merchant = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -97,18 +92,6 @@ class CartItem
     public function setCart(?Cart $cart): static
     {
         $this->cart = $cart;
-
-        return $this;
-    }
-
-    public function getMerchant(): ?Merchant
-    {
-        return $this->merchant;
-    }
-
-    public function setMerchant(?Merchant $merchant): static
-    {
-        $this->merchant = $merchant;
 
         return $this;
     }

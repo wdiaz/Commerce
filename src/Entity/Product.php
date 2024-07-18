@@ -50,6 +50,10 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mainImage = null;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Merchant $merchant = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -253,5 +257,17 @@ class Product
     public function getImagePath()
     {
         return 'images/products/'.$this->getMainImage();
+    }
+
+    public function getMerchant(): ?Merchant
+    {
+        return $this->merchant;
+    }
+
+    public function setMerchant(?Merchant $merchant): static
+    {
+        $this->merchant = $merchant;
+
+        return $this;
     }
 }

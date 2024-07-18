@@ -43,10 +43,17 @@ class Merchant
     #[ORM\OneToMany(mappedBy: 'merchant', targetEntity: CartItem::class)]
     private Collection $cartItems;
 
+    /**
+     * @var Collection<int, Product>
+     */
+    #[ORM\OneToMany(mappedBy: 'merchant', targetEntity: Product::class)]
+    private Collection $products;
+
     public function __construct()
     {
         $this->uuid = Uuid::v4();
         $this->cartItems = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
 
@@ -116,29 +123,29 @@ class Merchant
     }
 
     /**
-     * @return Collection<int, CartItem>
+     * @return Collection<int, Product>
      */
-    public function getCartItems(): Collection
+    public function getProducts(): Collection
     {
-        return $this->cartItems;
+        return $this->products;
     }
 
-    public function addCartItem(CartItem $cartItem): static
+    public function addProduct(Product $product): static
     {
-        if (!$this->cartItems->contains($cartItem)) {
-            $this->cartItems->add($cartItem);
-            $cartItem->setMerchant($this);
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setMerchant($this);
         }
 
         return $this;
     }
 
-    public function removeCartItem(CartItem $cartItem): static
+    public function removeProduct(Product $product): static
     {
-        if ($this->cartItems->removeElement($cartItem)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($cartItem->getMerchant() === $this) {
-                $cartItem->setMerchant(null);
+            if ($product->getMerchant() === $this) {
+                $product->setMerchant(null);
             }
         }
 
