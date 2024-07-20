@@ -1,4 +1,5 @@
 {
+    "proxy": "http://localhost:8080",
     "devDependencies": {
         "@babel/core": "^7.17.0",
         "@babel/plugin-syntax-jsx": "^7.24.1",
