@@ -4,12 +4,11 @@ export default function ({product})
     const currentProduct = JSON.parse(product);
 
     const handleAddToCart = () => {
-        const url = 'https://ox.local/api/cart_items';
+        const url = 'http://localhost:8080/api/carts/add-item';
         const cartItem = {
             "quantity": 3,
-            "product": "/api/products/" + currentProduct.id,
-            "price": 33,
-            "cart": "/api/carts/7"
+            "productId": 79,
+            "uuid": "36e06121-79a9-4ac1-a86d-9fe661bac067",
         };
 
         fetch(url, {

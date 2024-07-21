@@ -42,7 +42,7 @@ export default function ({product}) {
                                 <div className="flex mb-4">
                                     <div className="mr-4">
                                         <span className="font-bold text-gray-700 dark:text-black">Price:</span>
-                                        <span className="font-bold text-gray-700 dark:text-black">$29.99</span>
+                                        <span className="font-bold text-gray-700 dark:text-black">${currentProduct.price}</span>
                                     </div>
                                     <div>
                                         <span className="font-bold text-gray-700 dark:text-blac">Availability:</span>
