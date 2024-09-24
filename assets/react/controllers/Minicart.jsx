@@ -4,11 +4,14 @@ export default function () {
     const [cart, setCart] = useState(null);
     const [error, setError] = useState(null);
     const [cartItemCount, setCartItemCount] = useState(0);
-
+    let total = 0;
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://ox.local/api/carts/7', {
+                /**
+                 * @TODO: Refactor this call so it returns only the total item count, not the whole cart.
+                 */
+                const response = await fetch('http://localhost:8080/api/carts/36e06121-79a9-4ac1-a86d-9fe661bac067/cart', {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json'
@@ -18,12 +21,12 @@ export default function () {
                     throw new Error('Failed to fetch data');
                 }
                 const cart = await response.json();
-                const cartItemsUrls = Object.values(cart['cartItems']);
-                const itemsDataPromises = cartItemsUrls.map(url => fetch(url).then(response => response.json()));
-                const itemsData = await Promise.all(itemsDataPromises);
-                setCartItemCount(cartItemsUrls.length);
-                setCartItems(itemsData);
-                setCart(cart);
+                for (const element of cart['cartItems']) {
+                    total += element['quantity'];
+                }
+                setCartItemCount(total);
+                setCartItems(cart['cartItems']);
+                setCart(cart)
             } catch (error) {
                 setError(error.message);
             }
@@ -42,7 +45,7 @@ export default function () {
 
     return (
     <div className="flex items-center">
-        <a href="#" className="flex items-center space-x-2 text-white">
+        <a href="/cart" className="flex items-center space-x-2 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

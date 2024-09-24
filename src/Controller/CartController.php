@@ -17,8 +17,18 @@ class CartController extends AbstractController
     #[Route('/', name: 'app_cart_index', methods: ['GET'])]
     public function index(CartRepository $cartRepository): Response
     {
+        /**
+         * @TODO: Remove the line below
+         * For testing and developing purposes the line below is hardcoded.
+         */
+        $uuid = '36e06121-79a9-4ac1-a86d-9fe661bac067';
+
+        $cart = $cartRepository->findOneBy([
+            'uuid' => $uuid,
+        ]);
+
         return $this->render('cart/index.html.twig', [
-            'carts' => $cartRepository->findAll(),
+            'cart' => $cart,
         ]);
     }
 

@@ -37,6 +37,7 @@ final class ProductFactory extends ModelFactory
             'sku' => $product['sku'], // self::faker()->randomNumber(5),
             'long_description' => $product['description'], // $faker->description(),
             'merchant' => MerchantFactory::createOne(),
+            'price' => $product['price'],
         ];
     }
 

@@ -38,12 +38,6 @@ class Merchant
     private ?float $locationY = null;
 
     /**
-     * @var Collection<int, CartItem>
-     */
-    #[ORM\OneToMany(mappedBy: 'merchant', targetEntity: CartItem::class)]
-    private Collection $cartItems;
-
-    /**
      * @var Collection<int, Product>
      */
     #[ORM\OneToMany(mappedBy: 'merchant', targetEntity: Product::class)]
@@ -52,7 +46,6 @@ class Merchant
     public function __construct()
     {
         $this->uuid = Uuid::v4();
-        $this->cartItems = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 

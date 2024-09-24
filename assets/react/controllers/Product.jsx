@@ -12,7 +12,7 @@ export default function ({product}) {
                         <div className="md:flex-1 px-4">
                             <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                                 <img className="w-full h-full object-cover"
-                                     src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg"
+                                     src="/build/images/noimage.jpeg"
                                      alt="Product Image"/>
                             </div>
                             <div className="flex -mx-2 mb-4">
@@ -34,15 +34,13 @@ export default function ({product}) {
                                 ante justo. Integer euismod libero id mauris malesuada tincidunt.
                             </p>
 
-
                             <ProductRatingBar />
-
 
                             <div className="mt-4">
                                 <div className="flex mb-4">
                                     <div className="mr-4">
                                         <span className="font-bold text-gray-700 dark:text-black">Price:</span>
-                                        <span className="font-bold text-gray-700 dark:text-black">$29.99</span>
+                                        <span className="font-bold text-gray-700 dark:text-black">${currentProduct.price}</span>
                                     </div>
                                     <div>
                                         <span className="font-bold text-gray-700 dark:text-blac">Availability:</span>
