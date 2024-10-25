@@ -58,6 +58,9 @@ class Product
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private ?string $price = null;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -65,17 +68,25 @@ class Product
         $this->images = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSku(): ?string
     {
         return $this->sku;
     }
 
     /**
+     * @param string $sku
+     *
      * @return $this
      */
     public function setSku(string $sku): self
@@ -85,12 +96,17 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
+     * @param string $name
+     *
      * @return $this
      */
     public function setName(string $name): static
@@ -100,12 +116,17 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLongDescription(): ?string
     {
         return $this->longDescription;
     }
 
     /**
+     * @param string|null $longDescription
+     *
      * @return $this
      */
     public function setLongDescription(?string $longDescription): static
@@ -115,12 +136,17 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
+     * @param string|null $slug
+     *
      * @return $this
      */
     public function setSlug(?string $slug): static
@@ -139,6 +165,8 @@ class Product
     }
 
     /**
+     * @param Category $category
+     *
      * @return $this
      */
     public function addCategory(Category $category): static
@@ -151,6 +179,8 @@ class Product
     }
 
     /**
+     * @param Category $category
+     *
      * @return $this
      */
     public function removeCategory(Category $category): static
@@ -169,6 +199,8 @@ class Product
     }
 
     /**
+     * @param Variant $variant
+     *
      * @return $this
      */
     public function addVariant(Variant $variant): static
@@ -182,6 +214,8 @@ class Product
     }
 
     /**
+     * @param Variant $variant
+     *
      * @return $this
      */
     public function removeVariant(Variant $variant): static
@@ -217,6 +251,8 @@ class Product
     }
 
     /**
+     * @param Image $image
+     *
      * @return $this
      */
     public function removeImage(Image $image): static
@@ -230,11 +266,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getMainImage(): ?string
     {
         return $this->mainImage;
     }
 
+    /**
+     * @param string|null $mainImage
+     *
+     * @return $this
+     */
     public function setMainImage(?string $mainImage): static
     {
         $this->mainImage = $mainImage;
@@ -242,6 +286,11 @@ class Product
         return $this;
     }
 
+    /**
+     * @param File|null $imageFile
+     *
+     * @return void
+     */
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -253,21 +302,35 @@ class Product
         }
     }
 
+    /**
+     * @return File|null
+     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
+    /**
+     * @return string
+     */
     public function getImagePath()
     {
         return 'images/products/'.$this->getMainImage();
     }
 
+    /**
+     * @return Merchant|null
+     */
     public function getMerchant(): ?Merchant
     {
         return $this->merchant;
     }
 
+    /**
+     * @param Merchant|null $merchant
+     *
+     * @return $this
+     */
     public function setMerchant(?Merchant $merchant): static
     {
         $this->merchant = $merchant;
@@ -275,11 +338,19 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPrice(): ?string
     {
         return $this->price;
     }
 
+    /**
+     * @param string $price
+     *
+     * @return $this
+     */
     public function setPrice(string $price): static
     {
         $this->price = $price;
