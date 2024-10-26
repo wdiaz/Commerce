@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\Product;
 use App\Form\CartType;
 use App\Repository\CartRepository;
+use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,22 +16,41 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/cart')]
 class CartController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
     #[Route('/', name: 'app_cart_index', methods: ['GET'])]
-    public function index(CartRepository $cartRepository): Response
+    public function index(Request $request, CartRepository $cartRepository): Response
     {
         /**
          * @TODO: Remove the line below
          * For testing and developing purposes the line below is hardcoded.
          */
-        $uuid = '36e06121-79a9-4ac1-a86d-9fe661bac067';
+        //$uuid = 'daf04ddb-a66a-4c54-bbe9-e88b2903e30d';
+        $cartId = $request->getSession()->get('cart_id');
 
         $cart = $cartRepository->findOneBy([
-            'uuid' => $uuid,
+            'uuid' => $cartId,
         ]);
 
         return $this->render('cart/index.html.twig', [
             'cart' => $cart,
         ]);
+    }
+
+    #[Route('/{id}/add-item', name: 'app_cart_add_item', methods: ['GET'])]
+    public function addItemToCart(
+        Request $request,
+        CartService $cartService,
+        Product $product,
+    ): Response {
+        $cartId = $request->getSession()->get('cart_id');
+
+        $cart = $cartService->addItemToCart($cartId, $product, 7);
+
+        return $this->redirectToRoute('app_cart_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/new', name: 'app_cart_new', methods: ['GET', 'POST'])]

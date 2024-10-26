@@ -7,6 +7,7 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Uid\Uuid;
 
 final readonly class CartSessionIdListener
 {
@@ -25,7 +26,8 @@ final readonly class CartSessionIdListener
         }
 
         if (!$this->requestStack->getSession()->has('cart_id')) {
-            $this->requestStack->getSession()->set('cart_id', bin2hex(random_bytes(16)));
+            //$this->requestStack->getSession()->set('cart_id', bin2hex(random_bytes(16)));
+            $this->requestStack->getSession()->set('cart_id', Uuid::v4()->toRfc4122());
         }
     }
 

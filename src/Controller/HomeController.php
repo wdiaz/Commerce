@@ -14,7 +14,6 @@ class HomeController extends AbstractController
     public function index(ProductRepository $productRepository, ChartBuilderInterface $chartBuilder): Response
     {
         return $this->render('home/index.html.twig', [
-            'products' => $productRepository->findAll(),
             'hotProducts' => $productRepository->findBy([], ['id' => 'DESC'], 4),
         ]);
     }
