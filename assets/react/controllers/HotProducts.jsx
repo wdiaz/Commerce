@@ -31,7 +31,7 @@ export default function () {
                         <a href="#"> <img src="https://klbtheme.com/grogin/wp-content/uploads/2023/12/1-12-500x500.jpg"
                         alt="Product 1" className="w-32 h-32 object-cover"/></a>
                         <div className="flex flex-col ml-4 justify-between">
-                            <h3 className="text-lg font-semibold leading-tight"><a href={`/product/${product.id}`}> {product.name}</a></h3>
+                            <h3 className="text-lg font-semibold leading-tight"><a href={`/product/${product.slug}`}> {product.name}</a></h3>
                             <p className="text-sm font-light text-gray-600 mb-2">Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit.</p>
                             <div>

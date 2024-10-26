@@ -4,6 +4,7 @@ export default function ({product})
     const currentProduct = JSON.parse(product);
 
     const handleAddToCart = () => {
+        console.log("yoooo");
         const url = 'http://localhost:8080/api/carts/add-item';
         const cartItem = {
             "quantity": 3,

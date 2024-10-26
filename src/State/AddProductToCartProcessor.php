@@ -52,6 +52,8 @@ final class AddProductToCartProcessor implements ProcessorInterface
                 'sku' => $data->getProductSku(),
             ]);
 
+            $this->logger->error(sprintf("%s being added to the cart", $product->getSku()));
+
             if (null === $product) {
                 throw new ProductNotFoundException(sprintf("Product with sku '%s' not found.", $data->getProductId()));
             }
