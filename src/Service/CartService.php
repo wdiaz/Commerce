@@ -37,7 +37,7 @@ class CartService
         $cartItem = $this->findOrCreateCartItem($cart, $product);
         $cartItem->setQuantity($cartItem->getQuantity() + $quantity);
 
-        $cartItem->setPrice($product->getPrice());
+        $cartItem->setPrice((float) $product->getPrice());
         $this->entityManager->persist($cartItem);
         $this->entityManager->flush();
 
