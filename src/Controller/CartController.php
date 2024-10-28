@@ -28,15 +28,18 @@ class CartController extends AbstractController
          * @TODO: Remove the line below
          * For testing and developing purposes the line below is hardcoded.
          */
-        //$uuid = 'daf04ddb-a66a-4c54-bbe9-e88b2903e30d';
+        // $uuid = 'daf04ddb-a66a-4c54-bbe9-e88b2903e30d';
         $cartId = $request->getSession()->get('cart_id');
 
         $cart = $cartRepository->findOneBy([
             'uuid' => $cartId,
         ]);
 
+        $isCartEmpty = null === $cart || null === $cart->getCartItems();
+
         return $this->render('cart/index.html.twig', [
             'cart' => $cart,
+            'isCartEmpty' => $isCartEmpty,
         ]);
     }
 
