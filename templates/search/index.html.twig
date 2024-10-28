@@ -186,8 +186,30 @@
                 </ul>
             </div>
 
+            {% if (products is empty) %}
+                <h2 class="font-bold font-100"> No results found</h2>
+            {% else %}
+                <div class="w-full p-6">
+                    <h1 class="font-bold font-100">Results:</h1>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                        {% for product in products %}
+                            <li class="overflow-hidden flex flex-col items-center bg-white shadow rounded-lg min-h-[500px]">
+                                <div class="w-full h-[200px] flex items-center justify-center overflow-hidden">
+                                    <a href="{{ path('app_product_show', {'id': product.id, 'slug' : product.slug}) }}"><img src="{{ product.mainImage }}" alt="{{ product.name }}" class="object-cover h-full w-auto max-w-[230px] rounded-t-lg"></a>
+                                </div>
+                                <div class="flex-grow flex flex-col justify-between">
+                                    <p class="text-center mt-4 text-lg font-semibold text-dark-700"><a href="{{ path('app_product_show', {'id': product.id, 'slug' : product.slug}) }}"> {{ product.name }}</a>
+                                    <p class="text-bold text-3xl py-3 text-center">${{ product.price }}</p>
 
-            <h1 class="font-bold font-100">Results</h1>
+                                    <button class="bg-yellow-500 text-white text-center font-semibold py-2 px-4 rounded-lg shadow hover:bg-yellow-600 transition duration-200">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
 
 
         </div>
