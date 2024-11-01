@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\ProductActionType;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,17 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- *
- */
 #[Route('/product')]
 class ProductController extends AbstractController
 {
-    /**
-     * @param ProductRepository $productRepository
-     *
-     * @return Response
-     */
     #[Route('/', name: 'app_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
@@ -30,12 +23,6 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Request                $request
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
-     */
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -56,26 +43,17 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Product $product
-     *
-     * @return Response
-     */
-    #[Route('/{id}/{slug}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/{id}/{slug}', name: 'app_product_show', methods: ['GET', 'POST'])]
     public function show(Product $product): Response
     {
+        $productActionForm = $this->createForm(ProductActionType::class);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'form' => $productActionForm->createView(),
         ]);
     }
 
-    /**
-     * @param Request                $request
-     * @param Product                $product
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
-     */
     #[Route('/{id}/edit/{slug}', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
@@ -94,13 +72,6 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Request                $request
-     * @param Product                $product
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
-     */
     #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
