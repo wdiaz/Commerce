@@ -1,70 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-</head>
-<body class="bg-gray-100">
-
-<!-- Header -->
-<header class="shadow bg-gray-800">
-    <div class="flex justify-between items-center px-6 py-4">
-        <!-- Logo -->
-        <div class="flex items-center">
-            <img src="{{ asset('images/parts/logo.png') }}" alt="Logo" class="h-8">
-        </div>
-        <!-- Search Bar -->
-
-        <div {{ react_component('Search') }}>
-            Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
-        </div>
-        <!-- Cart -->
-        <div class="flex items-center">
-            <a href="#" class="flex items-center space-x-2 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.5 6H21M7 13l-1.5 7m0 0h13M5.5 20a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM18.5 20a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                </svg>
-                <span>6</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Second Row: Menu -->
-    <div class="bg-white bottom-0.5">
-        <nav class="flex justify-center space-x-4 py-2 text-blue-950">
-            <a href="#" class="hover:underline">Home</a>
-            <a href="#" class="hover:underline">Shop</a>
-            <a href="#" class="hover:underline">About</a>
-            <a href="#" class="hover:underline">Contact</a>
-        </nav>
-    </div>
-</header>
-
-<!-- Content -->
-<main class="container mx-auto py-8">
-    <div class="bg-white p-6 rounded-md shadow">
-        <body>
-        {% block body %}
-
         {% endblock %}
-        </body>
-    </div>
-</main>
-
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto text-center">
-        <p>&copy; 2024 Ox Marketplace. All rights reserved.</p>
-    </div>
-</footer>
-{% block javascripts %}
+        {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-    {{ encore_entry_script_tags('app') }}
-{% endblock %}
-</body>
+        {% endblock %}
+    </head>
+    <body class="bg-gray-100">
+
+        <!-- Header -->
+        <header class="flex bg-gray-900 items-center justify-between p-4 shadow-md">
+            <!-- Logo Section -->
+            <div class="flex-shrink-0 ">
+                <p><a href="/" class="text-white hover:text-gray-300"><img class="object-contain h-12 w-20" src="{{ asset('build/images/logo.png') }}" alt=""></a></p>
+            </div>
+
+            <!-- Search Bar Section (Largest Column) -->
+            <div class="flex-grow mx-4">
+                <div class="relative mx-auto">
+                    <form action="{{ path('app_search') }}" method="GET">
+                        <label>
+                            <input class="w-full py-2 px-4 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-yellow-600" type="search" placeholder="Search" name="query" value="{{ query | default('') }}">
+                        </label>
+                        <button class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-700 bg-yellow-500 border rounded-r-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:bg-yellow-600 focus:bg-yellow-600">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.795 13.408l5.204 5.204a1 1 0 01-1.414 1.414l-5.204-5.204a7.5 7.5 0 111.414-1.414zM8.5 14A5.5 5.5 0 103 8.5 5.506 5.506 0 008.5 14z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Account Section -->
+            <div class="flex-shrink-0 mr-4 text-white">
+                <a href="{{ path('app_account') }}" class="hover:text-gray-300">Account</a>
+            </div>
+
+            <!-- Shopping Cart Section -->
+            <div class="flex-shrink-0 text-white">
+                <a href="{{ path('app_cart_index') }}" class="hover:text-gray-300 flex items-center">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3m4 8l1.6 8h10.8l1.6-8H7z"></path>
+                    </svg>
+                </a>
+            </div>
+
+        </header>
+        <!-- Navigation Links Row -->
+        <div class="flex justify-center space-x-2 bg-gray-800">
+            <nav class="flex justify-center space-x-4 py-2 text-blue-950">
+                <a href="#" class="text-white  hover:text-gray-300">Fast Delivery Options</a>
+                <a href="#" class="text-white  hover:text-gray-300">Buy Again</a>
+                <a href="#" class="text-white  hover:text-gray-300">Deals of the Day</a>
+                <a href="#" class="text-white  hover:text-gray-300">Schedule and Save</a>
+            </nav>
+        </div>
+
+
+        <main class="container mx-auto">
+            <div class="bg-white p-6 rounded-md shadow">
+                {% block body %}
+
+                {% endblock %}
+
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2024 Ox Marketplace. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
 </html>

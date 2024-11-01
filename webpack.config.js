@@ -13,6 +13,11 @@ Encore
     .setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
+    .copyFiles({
+        from: './assets/img',
+        to: 'images/[path][name].[ext]',
+    })
+
 
     /*
      * ENTRY CONFIG
@@ -21,8 +26,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('related_products', './assets/js/components/pages/product/view/RelatedProducts')
-    .addEntry('edit_product', './assets/js/components/edit_product')
+    //.addEntry('related_products', './assets/js/components/pages/product/view/RelatedProducts')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -34,7 +38,11 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
-    .enablePostCssLoader()
+    .enablePostCssLoader((options) => {
+        options.postcssOptions = {
+            config: './postcss.config.js',
+        };
+    })
 
     /*
      * FEATURE CONFIG
@@ -68,7 +76,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you use React
-    //.enableReactPreset()
+    .enableReactPreset()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

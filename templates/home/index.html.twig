@@ -69,90 +69,27 @@
             </div>
         </div>
 
-       <!-- products -->
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5">
-            <!-- Product 1 -->
+            {% for product in hotProducts %}
             <div class="bg-white p-4 rounded-lg shadow-md flex">
-                <!-- Thumbnail on the left -->
-                <a href="#"> <img src="https://klbtheme.com/grogin/wp-content/uploads/2023/12/1-12-500x500.jpg" alt="Product 1" class="w-32 h-32 object-cover"></a>
-                <!-- Product details -->
+                <a href="#"> <img src="https://klbtheme.com/grogin/wp-content/uploads/2023/12/1-12-500x500.jpg"
+                                  alt="Product 1" class="w-32 h-32 object-cover"/></a>
                 <div class="flex flex-col ml-4 justify-between">
-                    <!-- Product title -->
-                    <h3 class="text-lg font-semibold"><a href=""> Product 1</a></h3>
-                    <p class="text-sm font-light text-gray-600 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <!-- Price -->
+                    <h3 class="text-lg font-semibold leading-tight"><a href="{{ path('app_product_show', {'id': product.id, 'slug' : product.slug}) }}"> {{ product.name }}</a></h3>
+                    <p class="text-sm font-light text-gray-600 mb-2">Lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit.</p>
                     <div>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-gray-700">$20.00</span>
-                            <!-- Lower crossed out price -->
                             <span class="text-gray-500 line-through">$25.00</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="bg-white p-4 rounded-lg shadow-md flex">
-                <!-- Thumbnail on the left -->
-                <a href="#"><img src="https://klbtheme.com/grogin/wp-content/uploads/2023/11/1-114-500x500.jpg" alt="Product 2" class="w-32 h-32 object-cover"></a>
-                <!-- Product details -->
-                <div class="flex flex-col ml-4 justify-between">
-                    <!-- Product title -->
-                    <h3 class="text-lg font-semibold"><a href="">Product 2</a></h3>
-                    <p class="text-sm font-light text-gray-600 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <!-- Price -->
-                    <div>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-gray-700">$30.00</span>
-                            <!-- Lower crossed out price -->
-                            <span class="text-gray-500 line-through">$35.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Product 4 -->
-            <div class="bg-white p-4 rounded-lg shadow-md flex">
-                <!-- Thumbnail on the left -->
-                <a href="#"><img src="https://klbtheme.com/grogin/wp-content/uploads/2023/12/1-500x500.jpg" alt="Product 1" class="w-32 h-32 object-cover"></a>
-                <!-- Product details -->
-                <div class="flex flex-col ml-4 justify-between">
-                    <!-- Product title -->
-                    <h3 class="text-lg font-semibold"><a href="#" text-lg font-semibold>Product 3</a></h3>
-                    <p class="text-sm font-light text-gray-600 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <!-- Price -->
-                    <div>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-gray-700">$20.00</span>
-                            <!-- Lower crossed out price -->
-                            <span class="text-gray-500 line-through">$25.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Product 4 -->
-            <div class="bg-white p-4 rounded-lg shadow-md flex">
-                <!-- Thumbnail on the left -->
-                <a href="#"><img src="https://klbtheme.com/grogin/wp-content/uploads/2023/11/1-124-500x500.jpg" alt="Product 1" class="w-32 h-32 object-cover"></a>
-                <!-- Product details -->
-                <div class="flex flex-col ml-4 justify-between">
-                    <!-- Product title -->
-                    <h3 class="text-lg font-semibold"><a href="">Product 4</a></h3>
-                    <p class="text-sm font-light text-gray-600 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <!-- Price -->
-                    <div>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-gray-700">$20.00</span>
-                            <!-- Lower crossed out price -->
-                            <span class="text-gray-500 line-through">$25.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more products as needed -->
+            {% endfor %}
         </div>
-        <!-- /products -->
-        <div {{ react_component('Hello', { 'fullName': 548 }) }}>
-            Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
-        </div>
+
     </main>
 
 

@@ -8,13 +8,210 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="flex">
+        <!-- Left Column (25% width) -->
+        <div class="md:w-1/5 p-4">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/html/src/Controller/SearchController.php</code></li>
-        <li>Your template at <code>/var/www/html/templates/search/index.html.twig</code></li>
-    </ul>
-</div>
+            <!-- parametrics -->
+
+            <h2 class="text-lg font-bold mb-4">Filter by</h2>
+
+            <!-- Gender Category -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-md mb-2">Gender</h3>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="gender" value="Men">
+                    <span class="ml-2">Men</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="gender" value="Women">
+                    <span class="ml-2">Women</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="gender" value="Boys">
+                    <span class="ml-2">Boys</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="gender" value="Girls">
+                    <span class="ml-2">Girls</span>
+                </label>
+            </div>
+
+            <!-- Size Category -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-md mb-2">Size</h3>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="size" value="6">
+                    <span class="ml-2">6</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="size" value="7">
+                    <span class="ml-2">7</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="size" value="8">
+                    <span class="ml-2">8</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="size" value="9">
+                    <span class="ml-2">9</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="size" value="10">
+                    <span class="ml-2">10</span>
+                </label>
+            </div>
+
+            <!-- Color Category -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-md mb-2">Color</h3>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="color" value="Red">
+                    <span class="ml-2">Red</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="color" value="Blue">
+                    <span class="ml-2">Blue</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="color" value="Black">
+                    <span class="ml-2">Black</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="color" value="White">
+                    <span class="ml-2">White</span>
+                </label>
+            </div>
+
+            <!-- Brand Category -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-md mb-2">Brand</h3>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="brand" value="Nike">
+                    <span class="ml-2">Nike</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="brand" value="Adidas">
+                    <span class="ml-2">Adidas</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="brand" value="Puma">
+                    <span class="ml-2">Puma</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300" name="brand" value="Reebok">
+                    <span class="ml-2">Reebok</span>
+                </label>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="font-semibold text-md mb-2">Price Range</h3>
+                <div class="flex flex-col space-y-2">
+                    <div class="relative w-full h-1 bg-gray-300 rounded-lg">
+                        <!-- Track for the selected range -->
+                        <div id="rangeTrack" class="absolute h-1 bg-blue-500 rounded-lg"></div>
+                        <!-- Minimum price slider -->
+                        <input type="range" min="0" max="500" value="100" id="minPriceSlider" class="absolute -top-1 h-3 w-full bg-transparent appearance-none pointer-events-none slider-thumb">
+                        <!-- Maximum price slider -->
+                        <input type="range" min="0" max="500" value="400" id="maxPriceSlider" class="absolute -top-1 h-3 w-full bg-transparent appearance-none pointer-events-none slider-thumb">
+                    </div>
+                    <div class="flex justify-between text-sm mt-1">
+                        <span id="minPriceDisplay">$0</span>
+                        <span id="maxPriceDisplay">$500</span>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                /* Custom styling for slider thumbs */
+                .slider-thumb::-webkit-slider-thumb {
+                    appearance: none;
+                    height: 12px;
+                    width: 12px;
+                    background-color: #3B82F6; /* Tailwind's blue-500 */
+                    border-radius: 50%;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 10;
+                }
+
+                .slider-thumb::-moz-range-thumb {
+                    appearance: none;
+                    height: 12px;
+                    width: 12px;
+                    background-color: #3B82F6;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 10;
+                }
+            </style>
+
+            <!-- /parametrics -->
+
+
+        </div>
+
+        <!-- Right Column (75% width) -->
+        <div class="md:w-4/5 p-4">
+
+            <p>Shop for <span class="font-bold">{{ query }} </span></p>
+            <div class="w-full p-6">
+                <ul class="flex gap-4">
+                    <li class="w-[208px] h-[265px] overflow-hidden flex flex-col items-center">
+                        <img src="https://m.media-amazon.com/images/G/01/sobolano/adidas.sobolano/1.png" alt="Item 1" class="w-full h-full object-cover">
+                        <span class="text-center mt-2 text-sm font-semibold ">Men's Footwear</span>
+                    </li>
+                    <li class="w-[208px] h-[265px] overflow-hidden flex flex-col items-center">
+                        <img src="https://m.media-amazon.com/images/G/01/sobolano/adidas.sobolano/2.png" alt="Item 2" class="w-full h-full object-cover">
+                        <span class="text-center mt-2 text-sm font-semibold text-gray-700">Women's Footwear</span>
+                    </li>
+                    <li class="w-[208px] h-[265px] overflow-hidden flex flex-col items-center">
+                        <img src="https://m.media-amazon.com/images/G/01/sobolano/adidas.sobolano/4.png" alt="Item 3" class="w-full h-full object-cover">
+                        <span class="text-center mt-2 text-sm font-semibold text-gray-700">Soccer</span>
+                    </li>
+                    <li class="w-[208px] h-[265px] overflow-hidden flex flex-col items-center">
+                        <img src="https://m.media-amazon.com/images/G/01/sobolano/adidas.sobolano/11.png" alt="Item 4" class="w-full h-full object-cover">
+                        <span class="text-center mt-2 text-sm font-semibold text-gray-700">Back to school</span>
+                    </li>
+                    <li class="w-[208px] h-[265px] overflow-hidden flex flex-col items-center">
+                        <img src="https://m.media-amazon.com/images/G/01/sobolano/adidas.sobolano/10.png" alt="Item 4" class="w-full h-full object-cover">
+                        <span class="text-center mt-2 text-sm font-semibold text-gray-700">Active wear</span>
+                    </li>
+                    <li class="w-[208px] h-[265px] overflow-hidden flex flex-col items-center">
+                        <img src="https://m.media-amazon.com/images/G/01/sobolano/adidas.sobolano/5.png" alt="Item 4" class="w-full h-full object-cover">
+                        <span class="text-center mt-2 text-sm font-semibold text-gray-700">Lifestyle</span>
+                    </li>
+                    <!-- Repeat for more items -->
+                </ul>
+            </div>
+
+            {% if (products is empty) %}
+                <h2 class="font-bold font-100"> No results found</h2>
+            {% else %}
+                <div class="w-full p-6">
+                    <h1 class="font-bold font-100">Results:</h1>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                        {% for product in products %}
+                            <li class="overflow-hidden flex flex-col items-center bg-white shadow rounded-lg min-h-[500px]">
+                                <div class="w-full h-[200px] flex items-center justify-center overflow-hidden">
+                                    <a href="{{ path('app_product_show', {'id': product.id, 'slug' : product.slug}) }}"><img src="{{ product.mainImage }}" alt="{{ product.name }}" class="object-cover h-full w-auto max-w-[230px] rounded-t-lg"></a>
+                                </div>
+                                <div class="flex-grow flex flex-col justify-between">
+                                    <p class="text-center mt-4 text-lg font-semibold text-dark-700"><a href="{{ path('app_product_show', {'id': product.id, 'slug' : product.slug}) }}"> {{ product.name }}</a>
+                                    <p class="text-bold text-3xl py-3 text-center">${{ product.price }}</p>
+
+                                    <button class="bg-yellow-500 text-white text-center font-semibold py-2 px-4 rounded-lg shadow hover:bg-yellow-600 transition duration-200">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
 {% endblock %}

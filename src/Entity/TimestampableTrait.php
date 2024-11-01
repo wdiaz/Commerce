@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+/**
+ * Allow classes to log created at and updated at
+ * without boilerplate.
+ */
 trait TimestampableTrait
 {
-
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
@@ -16,16 +19,12 @@ trait TimestampableTrait
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTimeImmutable $createdAt
      * @return $this
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
@@ -35,16 +34,12 @@ trait TimestampableTrait
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTimeImmutable|null $updatedAt
      * @return $this
      */
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
@@ -53,5 +48,4 @@ trait TimestampableTrait
 
         return $this;
     }
-
 }
