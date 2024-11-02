@@ -53,9 +53,11 @@ class CartController extends AbstractController
         $cartId = $request->getSession()->get('cart_id');
 
         $productActionForm = $this->createForm(ProductActionType::class);
+        $productActionForm->handleRequest($request);
         $quantity = 1;
-        if ($productActionForm->isSubmitted()) {
+        if ($productActionForm->isSubmitted() && $productActionForm->isValid()) {
             $quantity = $productActionForm->get('quantity')->getData();
+            dump($quantity);
         }
         $cart = $cartService->addItemToCart($cartId, $product, $quantity);
 
