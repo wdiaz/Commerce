@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Url;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProductType extends AbstractType
@@ -24,7 +25,9 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('sku', TextType::class)
-            ->add('slug', TextType::class)
+            ->add('slug', TextType::class, [
+                'required' => false,
+            ])
             /*->add('images', CollectionType::class, [
                 'entry_type' => ImageType::class,
                 'prototype' => true,
@@ -37,6 +40,19 @@ class ProductType extends AbstractType
                 'required' => true,
                 'mapped' => false,
             ])*/
+            ->add('mainImage', TextType::class, [
+                'label' => 'Main Image URL',
+                'required' => false, // Set to true if the image URL is mandatory
+                'attr' => [
+                    'placeholder' => 'Enter the URL of the main image',
+                ],
+                'constraints' => [
+                    new Url([
+                        'message' => 'Please enter a valid URL.',
+                    ]),
+                ],
+            ])
+
             ->add('merchant', EntityType::class, [
                 'class' => Merchant::class,
                 'choice_label' => 'name', // Assuming the Merchant entity has a 'name' property
