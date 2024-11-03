@@ -32,7 +32,7 @@
                 <td>{{ product.sku }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.slug }}</td>
-                <td>{{ product.longDescription }}</td>
+                <td>{{ product.longDescription|raw|truncate(100, true, '...') }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
