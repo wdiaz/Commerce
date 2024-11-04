@@ -4,6 +4,12 @@
 
 {% block body %}
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb flex space-x-4">
+            {{ breadcrumbs(product.categories.first) }}
+            <li class="breadcrumb-item active" aria-current="page">|  {{ product.name }}</li>
+        </ol>
+    </nav>
     <!-- product -->
     <div class="grid grid-cols-12 gap-4">
 
