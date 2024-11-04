@@ -13,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ApiResource]
 class Category
 {
+    use TimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -25,20 +27,22 @@ class Category
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
+    private ?Category $parent = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories')]
-    private Collection $products;
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
+    private Collection $children;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+
+        $this->children = new ArrayCollection();
     }
+
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories')]
+    private Collection $products;
 
     public function getId(): ?int
     {
@@ -81,18 +85,6 @@ class Category
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Product>
      */
@@ -115,6 +107,48 @@ class Category
     {
         if ($this->products->removeElement($product)) {
             $product->removeCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function getParent(): ?Category
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Category $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Category $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Category $child): self
+    {
+        if ($this->children->removeElement($child)) {
+            // Set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
         }
 
         return $this;
