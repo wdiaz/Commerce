@@ -6,8 +6,9 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb flex space-x-4">
-            {{ breadcrumbs(product.categories.first) }}
-            <li class="breadcrumb-item active" aria-current="page">|  {{ product.name }}</li>
+            {% if  product.categories.first != false %}
+                {{ breadcrumbs(product.categories.first) }}
+            {% endif %}
         </ol>
     </nav>
     <!-- product -->
