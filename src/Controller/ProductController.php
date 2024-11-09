@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductActionType;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +16,23 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/product')]
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'app_product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    private PaginationService $paginationService;
+    public function __construct(PaginationService $paginationService)
     {
+        $this->paginationService = $paginationService;
+    }
+    #[Route('/', name: 'app_product_index', methods: ['GET'])]
+    public function index(Request $request, ProductRepository $productRepository): Response
+    {
+        $page = (int) $request->query->get('page', 1);
+        $query = $productRepository->createPaginatedQuery();
+        $pagination = $this->paginationService->paginate($query, $page);
+
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $pagination['items'],
+            'currentPage' => $pagination['currentPage'],
+            'totalPages' => $pagination['totalPages'],
+            'totalItems' => $pagination['totalItems'],
         ]);
     }
 
@@ -75,7 +88,7 @@ class ProductController extends AbstractController
     #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
         }

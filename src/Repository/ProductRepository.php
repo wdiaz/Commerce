@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,13 @@ class ProductRepository extends ServiceEntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function createPaginatedQuery(): Query
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'ASC') // Adjust ordering as needed
+            ->getQuery();
     }
 
     //    /**

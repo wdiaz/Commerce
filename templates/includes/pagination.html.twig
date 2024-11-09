@@ -1,0 +1,24 @@
+{# templates/includes/pagination.html.twig #}
+{% macro renderPagination(currentPage, totalPages, baseUrl) %}
+    <div class="flex items-center justify-center py-4 space-x-1">
+        {% if currentPage > 1 %}
+            <a href="?page={{ currentPage - 1 }}" class="flex items-center px-4 py-2 text-gray-500 bg-gray-300 rounded-md">
+                Previous
+            </a>
+        {% endif %}
+
+        {% for page in 1..totalPages %}
+            {%  if currentPage == page %}
+                <span class="px-4 py-2 font-bold text-white bg-gray-800 rounded-md hover:bg-blue-400 hover:text-white">{{ page }}</span>
+            {% else %}
+                <a href="?page={{ page }}" class="px-4 py-2 font-bold text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if currentPage < totalPages %}
+            <a href="?page={{ currentPage + 1 }}" class="px-4 py-2 font-bold text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white">
+                Next
+            </a>
+        {% endif %}
+    </div>
+{% endmacro %}

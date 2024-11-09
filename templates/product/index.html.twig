@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% import 'includes/pagination.html.twig' as pagination %}
 {% block title %}Product index{% endblock %}
 
 {% block body %}
@@ -47,6 +47,18 @@
         {% endfor %}
         </tbody>
     </table>
+
+
+    <!-- pagination -->
+
+    {{ pagination.renderPagination(currentPage, totalPages, path('app_product_index')) }}
+
+
+    <!-- /pagination -->
+
+
+
+
 
     <a href="{{ path('app_product_new') }}">Create new</a>
 {% endblock %}
