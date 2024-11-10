@@ -34,7 +34,7 @@ class ProductRepository extends ServiceEntityRepository
         if ($query) {
             // Use wildcards to match partial queries
             $qb->andWhere('p.name LIKE :query OR p.longDescription LIKE :query')
-                ->setParameter('query', '%'.$query.'%');
+                ->setParameter('query', '%' . $query . '%');
         }
 
         return $qb->getQuery()->getResult();
