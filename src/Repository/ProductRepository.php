@@ -34,7 +34,7 @@ class ProductRepository extends ServiceEntityRepository
         if ($query) {
             // Use wildcards to match partial queries
             $qb->andWhere('p.name LIKE :query OR p.longDescription LIKE :query')
-                ->setParameter('query', '%' . $query . '%');
+                ->setParameter('query', '%'.$query.'%');
         }
 
         return $qb->getQuery()->getResult();
@@ -46,29 +46,4 @@ class ProductRepository extends ServiceEntityRepository
             ->orderBy('p.id', 'ASC') // Adjust ordering as needed
             ->getQuery();
     }
-
-    //    /**
-    //     * @return Product[] Returns an array of Product objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Product
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }
