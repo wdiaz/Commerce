@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Product;
 use App\Form\CartType;
+use App\Form\ProductActionType;
 use App\Repository\CartRepository;
 use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,7 +44,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/add-item', name: 'app_cart_add_item', methods: ['GET'])]
+    #[Route('/{id}/add-item', name: 'app_cart_add_item', methods: ['GET', 'POST'])]
     public function addItemToCart(
         Request $request,
         CartService $cartService,
@@ -51,7 +52,14 @@ class CartController extends AbstractController
     ): Response {
         $cartId = $request->getSession()->get('cart_id');
 
-        $cart = $cartService->addItemToCart($cartId, $product, 7);
+        $productActionForm = $this->createForm(ProductActionType::class);
+        $productActionForm->handleRequest($request);
+        $quantity = 1;
+        if ($productActionForm->isSubmitted() && $productActionForm->isValid()) {
+            $quantity = $productActionForm->get('quantity')->getData();
+            dump($quantity);
+        }
+        $cart = $cartService->addItemToCart($cartId, $product, $quantity);
 
         return $this->redirectToRoute('app_cart_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -17,6 +17,22 @@ Encore
         from: './assets/img',
         to: 'images/[path][name].[ext]',
     })
+    .copyFiles({
+        from: './node_modules/tinymce/skins', // Copy skins
+        to: 'tinymce/skins/[path][name].[ext]',
+    })
+    .copyFiles({
+        from: './node_modules/tinymce/icons', // Copy icons
+        to: 'tinymce/icons/[path][name].[ext]',
+    })
+    .copyFiles({
+        from: './node_modules/tinymce/themes', // Copy themes
+        to: 'tinymce/themes/[path][name].[ext]',
+    })
+    .copyFiles({
+        from: './node_modules/tinymce/plugins', // Copy plugins
+        to: 'tinymce/plugins/[path][name].[ext]',
+    })
 
 
     /*
@@ -26,13 +42,11 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('new_product', './assets/new_product.js')
     //.addEntry('related_products', './assets/js/components/pages/product/view/RelatedProducts')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
-
-    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    .enableStimulusBridge('./assets/controllers.json')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -56,8 +70,6 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
-    .enableReactPreset()
-
     // configure Babel
     // .configureBabel((config) => {
     //     config.plugins.push('@babel/a-babel-plugin');
