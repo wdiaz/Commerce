@@ -30,9 +30,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_merchant_index') }}">back to list</a>
+    <a href="{{ path('app_admin_merchant_index') }}">back to list</a>
 
-    <a href="{{ path('app_merchant_edit', {'id': merchant.id}) }}">edit</a>
+    <a href="{{ path('app_admin_merchant_edit', {'id': merchant.id}) }}">edit</a>
 
-    {{ include('merchant/_delete_form.html.twig') }}
+    {{ include('admin/merchant/_delete_form.html.twig') }}
 {% endblock %}
