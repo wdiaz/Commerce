@@ -9,6 +9,7 @@ products:
         long commutes or travels. Whether you're heading to the office, campus,
         or a business trip, this backpack is the perfect blend of style and functionality.
       price: 59.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Gray
@@ -24,6 +25,7 @@ products:
         elegance to your ensemble. Whether you're heading to a meeting or a coffee
         shop, carry your laptop with confidence in this luxurious sleeve.
       price: 39.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Brown
         - Tan
@@ -38,6 +40,7 @@ products:
         the RGB lighting adds a stylish touch to your setup. With its sleek and
         futuristic design, this gaming mouse is a must-have for serious gamers.
       price: 49.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - White
@@ -51,6 +54,7 @@ products:
         or practicing mindfulness, let the whispering winds diffuser create a serene atmosphere
         in your home.
       price: 29.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - White
         - Wood Grain
@@ -65,6 +69,7 @@ products:
         night's sleep. Transform your mattress into a luxurious retreat and wake
         up feeling refreshed and rejuvenated every morning.
       price: 79.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - White
         - Gray
@@ -80,6 +85,7 @@ products:
         you're working late or studying for exams, the galactic glow desk
         lamp keeps your workspace bright and stylish.
       price: 34.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Silver
@@ -95,6 +101,7 @@ products:
         this watch to keep accurate time while adding a touch of refinement
         to your ensemble.
       price: 99.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black/Silver
         - Brown/Gold
@@ -109,6 +116,7 @@ products:
         the stresses of daily life and immerse yourself in the calming beauty of our
         serene seascape wall art.
       price: 49.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Blue
         - Green
@@ -124,6 +132,7 @@ products:
         kitchen essentials with our eco-friendly bamboo cutting board and make a positive
         impact on the planet.
       price: 19.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Natural Bamboo
         - Dark Bamboo
@@ -141,6 +150,7 @@ products:
         forests, scaling mountains, or exploring remote trails, trust
         our alpine adventure hiking boots to take you there.
       price: 89.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Brown
         - Gray
@@ -154,6 +164,7 @@ products:
         the RGB lighting adds a stylish touch to your setup. With its sleek and
         futuristic design, this gaming mouse is a must-have for serious gamers.
       price: 49.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - White
@@ -167,6 +178,7 @@ products:
         gaming sessions, while the sleek metallic finish adds a touch of elegance
         to your setup.
       price: 59.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Red
         - Blue
@@ -179,6 +191,7 @@ products:
         design provides comfort and support during intense gaming sessions, while
         the vibrant LED lighting adds a dynamic flair to your setup.
       price: 39.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Green
@@ -191,6 +204,7 @@ products:
         gaming sessions, while the sleek matte finish adds a touch of sophistication
         to your setup. Get ready to take your gaming to the next level.
       price: 54.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Gray
         - Blue
@@ -203,6 +217,7 @@ products:
         effects. With its ergonomic design and sleek profile, the Velocity Gaming
         Mouse is the perfect choice for gamers seeking a competitive edge.
       price: 44.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Yellow
@@ -216,6 +231,7 @@ products:
         creates an immersive gaming atmosphere. Get ready to unleash your inner
         champion.
       price: 49.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Purple
@@ -229,6 +245,7 @@ products:
         finish adds a touch of style to your setup. Dominate the competition with
         the Nova Precision Gaming Mouse.
       price: 59.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpgc
       available_colors:
         - Silver
         - Gold
@@ -242,6 +259,7 @@ products:
         experience. With its ergonomic design and sleek profile, the Aurora Elite
         Gaming Mouse is the perfect choice for gamers who demand excellence.
       price: 69.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Pink
@@ -255,6 +273,7 @@ products:
         during long gaming sessions, while the sleek matte finish adds a touch of
         style to your setup.
       price: 49.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Orange
@@ -268,6 +287,7 @@ products:
         a touch of style to your setup. Elevate your gaming experience with the
         Titanium Gaming Mouse.
       price: 64.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpgc
       available_colors:
         - Gray
         - Cyan
@@ -280,6 +300,7 @@ products:
         ensures comfort during long gaming sessions, while the dynamic RGB lighting
         adds a touch of flair to your setup. Get ready to dominate the competition.
       price: 54.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Teal
@@ -292,6 +313,7 @@ products:
         extended gaming sessions, while the sleek metallic finish adds a touch of
         style to your setup. Get ready to conquer the virtual battlefield.
       price: 59.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Lime
@@ -305,6 +327,7 @@ products:
         touch of sophistication to your setup. Dominate your opponents with the
         Phantom Precision Gaming Mouse.
       price: 49.99
+      main_image: https://m.media-amazon.com/images/I/81EOKCJaVqL._AC_SX695_.jpg
       available_colors:
         - Black
         - Red

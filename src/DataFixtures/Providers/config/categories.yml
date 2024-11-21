@@ -1,0 +1,5 @@
+categories:
+    - name: Clothing, Shoes & Jewelry
+      parentId: 0
+    - name: Men
+      parentId: 1
