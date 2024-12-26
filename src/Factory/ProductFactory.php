@@ -4,12 +4,12 @@ namespace App\Factory;
 
 use App\Entity\Product;
 use Faker\Factory;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<Product>
+ *
  */
-final class ProductFactory extends ModelFactory
+final class ProductFactory extends PersistentObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -22,15 +22,22 @@ final class ProductFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
+     * @return string
      */
-    protected function getDefaults(): array
+    public static function class(): string
+    {
+        return Product::class;
+    }
+
+    /**
+     * @return array|callable
+     */
+    protected function defaults(): array|callable
     {
         $faker = Factory::create();
         $faker->addProvider(new CustomProvider($faker));
         $product = $faker->product();
+
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'name' => $product['name'], // $faker->name(),
@@ -38,21 +45,19 @@ final class ProductFactory extends ModelFactory
             'long_description' => $product['description'], // $faker->description(),
             'merchant' => MerchantFactory::createOne(),
             'price' => $product['price'],
+            'main_image' => $product['main_image'],
         ];
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     *
+     * @return $this
      */
-    protected function initialize(): self
+    protected function initialize(): static
     {
         return $this
             // ->afterInstantiate(function(Product $product): void {})
         ;
-    }
-
-    protected static function getClass(): string
-    {
-        return Product::class;
     }
 }

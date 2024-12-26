@@ -17,14 +17,15 @@ class SearchController extends AbstractController
         $query = $request->query->get('query');
         if (SkuHelper::isSku($query)) {
             $product = $productRepository->findOneBy(['sku' => $query]);
-            if($product){
+            if ($product) {
                 return $this->redirectToRoute('app_product_show', [
-                    'id' => $product->getId(), 'slug' => $product->getSlug()
+                    'id' => $product->getId(), 'slug' => $product->getSlug(),
                 ]);
             }
         }
 
         $products = $productRepository->searchProducts($query);
+
         return $this->render('search/index.html.twig', [
             'controller_name' => 'SearchController',
             'query' => $query,
