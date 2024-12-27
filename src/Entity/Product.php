@@ -59,6 +59,12 @@ class Product
     private ?string $price = null;
 
     /**
+     * @var Collection<int, ProductOption>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductOption::class, orphanRemoval: true)]
+    private Collection $productOptions;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -66,6 +72,7 @@ class Product
         $this->categories = new ArrayCollection();
         $this->variant = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->productOptions = new ArrayCollection();
     }
 
     /**
@@ -354,6 +361,36 @@ class Product
     public function setPrice(string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductOption>
+     */
+    public function getProductOptions(): Collection
+    {
+        return $this->productOptions;
+    }
+
+    public function addProductOption(ProductOption $productOption): static
+    {
+        if (!$this->productOptions->contains($productOption)) {
+            $this->productOptions->add($productOption);
+            $productOption->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductOption(ProductOption $productOption): static
+    {
+        if ($this->productOptions->removeElement($productOption)) {
+            // set the owning side to null (unless already changed)
+            if ($productOption->getProduct() === $this) {
+                $productOption->setProduct(null);
+            }
+        }
 
         return $this;
     }
