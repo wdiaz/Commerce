@@ -39,8 +39,8 @@ class Product
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Variant::class, orphanRemoval: true)]
-    private Collection $variant;
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductVariant::class, orphanRemoval: true)]
+    private Collection $variants;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
@@ -59,41 +59,26 @@ class Product
     private ?string $price = null;
 
     /**
-     * @var Collection<int, ProductOption>
-     */
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductOption::class, orphanRemoval: true)]
-    private Collection $productOptions;
-
-    /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->variant = new ArrayCollection();
+        $this->variants = new ArrayCollection();
         $this->images = new ArrayCollection();
-        $this->productOptions = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSku(): ?string
     {
         return $this->sku;
     }
 
     /**
-     * @param string $sku
-     *
      * @return $this
      */
     public function setSku(string $sku): self
@@ -103,17 +88,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return $this
      */
     public function setName(string $name): static
@@ -123,17 +103,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLongDescription(): ?string
     {
         return $this->longDescription;
     }
 
     /**
-     * @param string|null $longDescription
-     *
      * @return $this
      */
     public function setLongDescription(?string $longDescription): static
@@ -143,17 +118,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @param string|null $slug
-     *
      * @return $this
      */
     public function setSlug(?string $slug): static
@@ -172,8 +142,6 @@ class Product
     }
 
     /**
-     * @param Category $category
-     *
      * @return $this
      */
     public function addCategory(Category $category): static
@@ -186,8 +154,6 @@ class Product
     }
 
     /**
-     * @param Category $category
-     *
      * @return $this
      */
     public function removeCategory(Category $category): static
@@ -198,22 +164,20 @@ class Product
     }
 
     /**
-     * @return Collection<int, Variant>
+     * @return Collection<int, ProductVariant>
      */
-    public function getVariant(): Collection
+    public function getVariants(): Collection
     {
-        return $this->variant;
+        return $this->variants;
     }
 
     /**
-     * @param Variant $variant
-     *
      * @return $this
      */
-    public function addVariant(Variant $variant): static
+    public function addVariant(ProductVariant $variant): static
     {
-        if (!$this->variant->contains($variant)) {
-            $this->variant->add($variant);
+        if (!$this->variants->contains($variant)) {
+            $this->variants->add($variant);
             $variant->setProduct($this);
         }
 
@@ -221,13 +185,11 @@ class Product
     }
 
     /**
-     * @param Variant $variant
-     *
      * @return $this
      */
-    public function removeVariant(Variant $variant): static
+    public function removeVariant(ProductVariant $variant): static
     {
-        if ($this->variant->removeElement($variant)) {
+        if ($this->variants->removeElement($variant)) {
             if ($variant->getProduct() === $this) {
                 $variant->setProduct(null);
             }
@@ -258,8 +220,6 @@ class Product
     }
 
     /**
-     * @param Image $image
-     *
      * @return $this
      */
     public function removeImage(Image $image): static
@@ -273,17 +233,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMainImage(): ?string
     {
         return $this->mainImage;
     }
 
     /**
-     * @param string|null $mainImage
-     *
      * @return $this
      */
     public function setMainImage(?string $mainImage): static
@@ -293,11 +248,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @param File|null $imageFile
-     *
-     * @return void
-     */
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -309,9 +259,6 @@ class Product
         }
     }
 
-    /**
-     * @return File|null
-     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
@@ -325,17 +272,12 @@ class Product
         return 'images/products/'.$this->getMainImage();
     }
 
-    /**
-     * @return Merchant|null
-     */
     public function getMerchant(): ?Merchant
     {
         return $this->merchant;
     }
 
     /**
-     * @param Merchant|null $merchant
-     *
      * @return $this
      */
     public function setMerchant(?Merchant $merchant): static
@@ -345,52 +287,17 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPrice(): ?string
     {
         return $this->price;
     }
 
     /**
-     * @param string $price
-     *
      * @return $this
      */
     public function setPrice(string $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ProductOption>
-     */
-    public function getProductOptions(): Collection
-    {
-        return $this->productOptions;
-    }
-
-    public function addProductOption(ProductOption $productOption): static
-    {
-        if (!$this->productOptions->contains($productOption)) {
-            $this->productOptions->add($productOption);
-            $productOption->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductOption(ProductOption $productOption): static
-    {
-        if ($this->productOptions->removeElement($productOption)) {
-            // set the owning side to null (unless already changed)
-            if ($productOption->getProduct() === $this) {
-                $productOption->setProduct(null);
-            }
-        }
 
         return $this;
     }

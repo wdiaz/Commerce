@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Variant;
+use App\Entity\ProductVariant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Variant>
+ * @extends ServiceEntityRepository<ProductVariant>
  *
- * @method Variant|null find($id, $lockMode = null, $lockVersion = null)
- * @method Variant|null findOneBy(array $criteria, array $orderBy = null)
- * @method Variant[]    findAll()
- * @method Variant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProductVariant|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProductVariant|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProductVariant[]    findAll()
+ * @method ProductVariant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class VariantRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Variant::class);
+        parent::__construct($registry, ProductVariant::class);
     }
 
 //    /**
-//     * @return Variant[] Returns an array of Variant objects
+//     * @return ProductVariant[] Returns an array of ProductVariant objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class VariantRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Variant
+//    public function findOneBySomeField($value): ?ProductVariant
 //    {
 //        return $this->createQueryBuilder('v')
 //            ->andWhere('v.exampleField = :val')
