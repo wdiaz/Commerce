@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 #[ApiResource]
 #[ORM\Table(name: 'products')]
-class Product
+class Product implements ProductInterface
 {
     use TimestampableTrait;
 
@@ -39,9 +39,6 @@ class Product
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductVariant::class, orphanRemoval: true)]
-    private Collection $variants;
-
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
 
@@ -59,13 +56,19 @@ class Product
     private ?string $price = null;
 
     /**
+     * @var Collection<int, ProductAttribute>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductAttribute::class)]
+    private Collection $productAttributes;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->variants = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->productAttributes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,41 +162,6 @@ class Product
     public function removeCategory(Category $category): static
     {
         $this->categories->removeElement($category);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ProductVariant>
-     */
-    public function getVariants(): Collection
-    {
-        return $this->variants;
-    }
-
-    /**
-     * @return $this
-     */
-    public function addVariant(ProductVariant $variant): static
-    {
-        if (!$this->variants->contains($variant)) {
-            $this->variants->add($variant);
-            $variant->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function removeVariant(ProductVariant $variant): static
-    {
-        if ($this->variants->removeElement($variant)) {
-            if ($variant->getProduct() === $this) {
-                $variant->setProduct(null);
-            }
-        }
 
         return $this;
     }
@@ -298,6 +266,44 @@ class Product
     public function setPrice(string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVariant(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return Collection<int, ProductAttribute>
+     */
+    public function getProductAttributes(): Collection
+    {
+        return $this->productAttributes;
+    }
+
+    public function addProductAttribute(ProductAttribute $productAttribute): static
+    {
+        if (!$this->productAttributes->contains($productAttribute)) {
+            $this->productAttributes->add($productAttribute);
+            $productAttribute->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductAttribute(ProductAttribute $productAttribute): static
+    {
+        if ($this->productAttributes->removeElement($productAttribute)) {
+            // set the owning side to null (unless already changed)
+            if ($productAttribute->getProduct() === $this) {
+                $productAttribute->setProduct(null);
+            }
+        }
 
         return $this;
     }

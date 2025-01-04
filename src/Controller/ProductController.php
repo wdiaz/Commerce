@@ -5,8 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductActionType;
 use App\Form\VariantOptionType;
-use App\Repository\ProductRepository;
-use App\Repository\VariantRepository;
+use App\Service\SkuSearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,9 +17,6 @@ class ProductController extends AbstractController
     public function show(Product $product): Response
     {
 
-        foreach ($product->getVariants() as $key => $variant) {
-            dump($variant->getProductVariantOptions()->toArray());
-        }
         $productActionForm = $this->createForm(ProductActionType::class);
         // Example product data with multiple options
         $productOptions = [
@@ -32,6 +28,7 @@ class ProductController extends AbstractController
         $optionForm = $this->createForm(VariantOptionType::class, null, [
             'productOptions' => $productOptions,
         ]);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'form' => $productActionForm->createView(),
@@ -39,7 +36,13 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/{sku}', name: 'app_product_show_by_sku', methods: ['GET', 'POST'])]
+    public function showBySku(string $sku, SkuSearchService $searchService): Response
+    {
+        $product = $searchService->findBySku($sku);
 
+        dump($product);
 
-
+        exit;
+    }
 }
