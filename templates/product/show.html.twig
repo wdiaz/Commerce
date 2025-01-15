@@ -28,7 +28,8 @@
             {% include 'product/partials/ratingbar.html.twig' %}
             <div class="product-widget">
                 {% include 'product/partials/product.html.twig' with {
-                    product: product
+                    product: product,
+                    form: form
                 } %}
             </div>
         </div>

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Form\ProductActionType;
+use App\Form\SizeSelectorType;
 use App\Form\VariantOptionType;
 use App\Service\SkuSearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,23 +16,21 @@ class ProductController extends AbstractController
     #[Route('/{id}/{slug}', name: 'app_product_show', methods: ['GET', 'POST'])]
     public function show(Product $product): Response
     {
+        $sizeOption = $product->getProductOptions()->filter(function ($option) {
+            if ('Size' == $option->getAttributeName()) {
+                return true;
+            }
 
-        $productActionForm = $this->createForm(ProductActionType::class);
-        // Example product data with multiple options
-        $productOptions = [
-            'shoeSize' => ['5' => '5', '5.5' => '5.5', '6' => '6', '6.5' => '6.5', '7' => '7'],
-            'color' => ['Red' => 'red', 'Blue' => 'blue', 'Green' => 'green'],
-        ];
+            return false;
+        })->first();
 
-        // Pass product options dynamically
-        $optionForm = $this->createForm(VariantOptionType::class, null, [
-            'productOptions' => $productOptions,
+        $productActionForm = $this->createForm(SizeSelectorType::class, null, [
+            'sizes' => $sizeOption->getProductOptionValues()->toArray(),
         ]);
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'form' => $productActionForm->createView(),
-            'optionForm' => $optionForm->createView(),
         ]);
     }
 

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductOption index{% endblock %}
+
+{% block body %}
+    <h1>ProductOption index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>OptionType</th>
+                <th>AttributeName</th>
+                <th>Label</th>
+                <th>IsRequired</th>
+                <th>DisplayOrder</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product_option in product_options %}
+            <tr>
+                <td>{{ product_option.id }}</td>
+                <td>{{ product_option.name }}</td>
+                <td>{{ product_option.optionType }}</td>
+                <td>{{ product_option.attributeName }}</td>
+                <td>{{ product_option.label }}</td>
+                <td>{{ product_option.isRequired ? 'Yes' : 'No' }}</td>
+                <td>{{ product_option.displayOrder }}</td>
+                <td>
+                    <a href="{{ path('app_product_option_show', {'id': product_option.id}) }}">show</a>
+                    <a href="{{ path('app_product_option_edit', {'id': product_option.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_option_new') }}">Create new</a>
+{% endblock %}
