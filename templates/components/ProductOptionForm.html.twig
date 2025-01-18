@@ -1,6 +1,8 @@
-{{ form_start(form, { 'attr' : { 'class': 'max-w-lg' } }) }}
-
-<div class="grid gap-4">
+<div
+        {{ attributes }}
+>
+    {{ form_start(form, { 'attr' : { 'class': 'max-w-lg' } }) }}
+    <div class="grid gap-4">
         <div class="mt-6">
             <div class="mt-1">
                 {{ form_row(form.name, {'attr': {'class': 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2'} }) }}
@@ -40,8 +42,8 @@
             <table class="table mce-item-table">
                 <thead>
                 <tr>
-                    <td>Item</td>
-                    <td>Priority</td>
+                    <td>Value</td>
+                    <td>Display Order</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,20 +52,21 @@
                         <td>
                             {{ form_row(item_form.attributeValue, {
                                 label: false,
-                                row_attr: {class: 'text-lg bg-white shadow-sm'},
+                                row_attr: {class: 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2'},
                                 attr: {
-                                    placeholder: 'Walk the pygmy hippo'
+                                    placeholder: 'Type property'
                                 }
                             }) }}
                         </td>
                         <td>
                             {{ form_row(item_form.displayOrder, {
-                                row_attr: {class: 'text-lg bg-white shadow-sm'},
+                                row_attr: {class: 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2'},
                                 label: false,
                             }) }}
                         </td>
                         <td>
-                            {{ form_row(item_form.button_delete, {label: 'X', attr: {class: 'bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'}}) }}
+                            {{ form_widget(item_form.vars.button_delete, {label: 'X', attr: {class: 'bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue'}}) }}
+
                         </td>
                     </tr>
                 {% endfor %}
@@ -71,6 +74,7 @@
             </table>
             <!-- /table -->
             {{ form_widget(form.productOptionValues.vars.button_add, {label: '+ Add Item', attr: {class: 'flex flex-no-wrap mt-6 border-2 border-black bg-yellow-500 py-2 px-4'}}) }}
+
         </div>
 
         <div>
@@ -83,10 +87,11 @@
 
         </div>
         {{form_widget(form._token)}}
+    </div>
+
+
+
+
+
+    {{ form_end(form, {'render_rest': false}) }}
 </div>
-
-
-
-
-
-{{ form_end(form, {'render_rest': false}) }}

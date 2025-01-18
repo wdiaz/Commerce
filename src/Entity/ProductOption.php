@@ -38,13 +38,13 @@ class ProductOption
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'productOptions')]
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'productOptions', orphanRemoval: true)]
     private Collection $products;
 
     /**
      * @var Collection<int, ProductOptionValue>
      */
-    #[ORM\OneToMany(mappedBy: 'productOption', targetEntity: ProductOptionValue::class)]
+    #[ORM\OneToMany(mappedBy: 'productOption', targetEntity: ProductOptionValue::class, cascade: ['persist'])]
     private Collection $productOptionValues;
 
     public function __construct()
