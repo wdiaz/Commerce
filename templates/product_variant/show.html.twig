@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductVariant{% endblock %}
+
+{% block body %}
+    <h1>ProductVariant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product_variant.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ product_variant.createdAt ? product_variant.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ product_variant.updatedAt ? product_variant.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Sku</th>
+                <td>{{ product_variant.sku }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ product_variant.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product_variant.price }}</td>
+            </tr>
+            <tr>
+                <th>Main_image</th>
+                <td>{{ product_variant.mainImage }}</td>
+            </tr>
+            <tr>
+                <th>Thumbnail</th>
+                <td>{{ product_variant.thumbnail }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_variant_index') }}">back to list</a>
+
+    <a href="{{ path('app_product_variant_edit', {'id': product_variant.id}) }}">edit</a>
+
+    {{ include('product_variant/_delete_form.html.twig') }}
+{% endblock %}

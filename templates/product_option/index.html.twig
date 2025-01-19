@@ -3,32 +3,36 @@
 {% block title %}ProductOption index{% endblock %}
 
 {% block body %}
-    <h1>ProductOption index</h1>
+    <h1>Product Options Index</h1>
 
-    <table class="table">
+    <a href="{{ path('app_admin') }}" class="inline-flex items-center text-gray-600 hover:text-gray-800 font-semibold p-4">
+        <i class="fas fa-arrow-left mr-2"></i>
+        << Back to Admin
+    </a>
+
+<div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
+    <table class="sw-full table-fixed">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>OptionType</th>
-                <th>AttributeName</th>
-                <th>Label</th>
-                <th>IsRequired</th>
-                <th>DisplayOrder</th>
-                <th>actions</th>
+        <tr>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">OptionType</th>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">AttributeName</th>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Label</th>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">IsRequired</th>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">DisplayOrder</th>
+            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-white">
         {% for product_option in product_options %}
             <tr>
-                <td>{{ product_option.id }}</td>
-                <td>{{ product_option.name }}</td>
-                <td>{{ product_option.optionType }}</td>
-                <td>{{ product_option.attributeName }}</td>
-                <td>{{ product_option.label }}</td>
-                <td>{{ product_option.isRequired ? 'Yes' : 'No' }}</td>
-                <td>{{ product_option.displayOrder }}</td>
-                <td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product_option.name }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product_option.optionType }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product_option.attributeName }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product_option.label }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product_option.isRequired ? 'Yes' : 'No' }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product_option.displayOrder }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">
                     <a href="{{ path('app_product_option_show', {'id': product_option.id}) }}">show</a>
                     <a href="{{ path('app_product_option_edit', {'id': product_option.id}) }}">edit</a>
                 </td>
