@@ -375,4 +375,9 @@ class Product implements ProductInterface
 
         return $this;
     }
+
+    public function hasVariants(): bool
+    {
+        return false === $this->productVariants->isEmpty();
+    }
 }
