@@ -14,8 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ProductVariant
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column]
@@ -51,6 +51,8 @@ class ProductVariant
     public function __construct()
     {
         $this->productVariantOptions = new ArrayCollection();
+
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
