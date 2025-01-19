@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProductOptionValueRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductOptionValueRepository::class)]
@@ -23,6 +25,17 @@ class ProductOptionValue
 
     #[ORM\ManyToOne(inversedBy: 'productOptionValues')]
     private ?ProductOption $productOption = null;
+
+    /**
+     * @var Collection<int, ProductVariantOption>
+     */
+    #[ORM\OneToMany(mappedBy: 'productOptionValue', targetEntity: ProductVariantOption::class)]
+    private Collection $productVariantOptions;
+
+    public function __construct()
+    {
+        $this->productVariantOptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,6 +74,36 @@ class ProductOptionValue
     public function setProductOption(?ProductOption $productOption): static
     {
         $this->productOption = $productOption;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductVariantOption>
+     */
+    public function getProductVariantOptions(): Collection
+    {
+        return $this->productVariantOptions;
+    }
+
+    public function addProductVariantOption(ProductVariantOption $productVariantOption): static
+    {
+        if (!$this->productVariantOptions->contains($productVariantOption)) {
+            $this->productVariantOptions->add($productVariantOption);
+            $productVariantOption->setProductOptionValue($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductVariantOption(ProductVariantOption $productVariantOption): static
+    {
+        if ($this->productVariantOptions->removeElement($productVariantOption)) {
+            // set the owning side to null (unless already changed)
+            if ($productVariantOption->getProductOptionValue() === $this) {
+                $productVariantOption->setProductOptionValue(null);
+            }
+        }
 
         return $this;
     }

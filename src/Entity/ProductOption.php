@@ -47,10 +47,17 @@ class ProductOption
     #[ORM\OneToMany(mappedBy: 'productOption', targetEntity: ProductOptionValue::class, cascade: ['persist'])]
     private Collection $productOptionValues;
 
+    /**
+     * @var Collection<int, ProductVariantOption>
+     */
+    #[ORM\OneToMany(mappedBy: 'productOption', targetEntity: ProductVariantOption::class)]
+    private Collection $productVariantOptions;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->productOptionValues = new ArrayCollection();
+        $this->productVariantOptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,6 +188,36 @@ class ProductOption
             // set the owning side to null (unless already changed)
             if ($productOptionValue->getProductOption() === $this) {
                 $productOptionValue->setProductOption(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductVariantOption>
+     */
+    public function getProductVariantOptions(): Collection
+    {
+        return $this->productVariantOptions;
+    }
+
+    public function addProductVariantOption(ProductVariantOption $productVariantOption): static
+    {
+        if (!$this->productVariantOptions->contains($productVariantOption)) {
+            $this->productVariantOptions->add($productVariantOption);
+            $productVariantOption->setProductOption($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductVariantOption(ProductVariantOption $productVariantOption): static
+    {
+        if ($this->productVariantOptions->removeElement($productVariantOption)) {
+            // set the owning side to null (unless already changed)
+            if ($productVariantOption->getProductOption() === $this) {
+                $productVariantOption->setProductOption(null);
             }
         }
 

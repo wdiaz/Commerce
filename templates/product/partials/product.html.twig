@@ -6,6 +6,20 @@
     <h3 class="text-3xl font-bold mb-2">${{ product.price }}</h3>
 </div>
 
+
+<p>Variants</p>
+
+<div class=" bg-gray-400 p-4 border border-gray-600">
+    {% for variant in product.productVariants %}
+        <div class="relative">
+            <img src="https://m.media-amazon.com/images/I/413aecE0r2L._SS36_.jpg" alt="Thumbnail">
+        </div>
+    {% endfor %}
+
+</div>
+
+
+
 <div class="flex">
     {{ form_row(form.size) }}
 </div>

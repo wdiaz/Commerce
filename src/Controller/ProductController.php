@@ -16,6 +16,7 @@ class ProductController extends AbstractController
     #[Route('/{id}/{slug}', name: 'app_product_show', methods: ['GET', 'POST'])]
     public function show(Product $product): Response
     {
+
         $sizeOption = $product->getProductOptions()->filter(function ($option) {
             if ('Size' == $option->getAttributeName()) {
                 return true;

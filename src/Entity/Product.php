@@ -68,6 +68,12 @@ class Product implements ProductInterface
     private Collection $productOptions;
 
     /**
+     * @var Collection<int, ProductVariant>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductVariant::class)]
+    private Collection $productVariants;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -76,6 +82,7 @@ class Product implements ProductInterface
         $this->images = new ArrayCollection();
         $this->productAttributes = new ArrayCollection();
         $this->productOptions = new ArrayCollection();
+        $this->productVariants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -335,6 +342,36 @@ class Product implements ProductInterface
     public function removeProductOption(ProductOption $productOption): static
     {
         $this->productOptions->removeElement($productOption);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductVariant>
+     */
+    public function getProductVariants(): Collection
+    {
+        return $this->productVariants;
+    }
+
+    public function addProductVariant(ProductVariant $productVariant): static
+    {
+        if (!$this->productVariants->contains($productVariant)) {
+            $this->productVariants->add($productVariant);
+            $productVariant->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductVariant(ProductVariant $productVariant): static
+    {
+        if ($this->productVariants->removeElement($productVariant)) {
+            // set the owning side to null (unless already changed)
+            if ($productVariant->getProduct() === $this) {
+                $productVariant->setProduct(null);
+            }
+        }
 
         return $this;
     }
