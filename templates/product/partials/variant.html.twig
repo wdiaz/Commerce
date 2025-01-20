@@ -9,13 +9,17 @@
 
 <p>Variants</p>
 
-<div class=" bg-gray-400 p-4 border border-gray-600">
-    {% for variant in product.productVariants %}
-        <div class="relative">
-            <img src="https://m.media-amazon.com/images/I/413aecE0r2L._SS36_.jpg" alt="Thumbnail">
-        </div>
-    {% endfor %}
-
+<div class="bg-gray-400 p-4 border border-gray-600">
+    <div class="flex flex-wrap justify-end gap-4">
+        {% for variant in product.productVariants %}
+            <div class="flex flex-col items-center">
+                <div class="relative">
+                    <img src="https://m.media-amazon.com/images/I/413aecE0r2L._SS36_.jpg" alt="Thumbnail" class="w-12 h-12 rounded">
+                </div>
+                <span class="text-sm font-medium text-gray-700 mt-2">{{ variant.sku }}</span>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 <div class="flex">
