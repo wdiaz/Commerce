@@ -33,8 +33,14 @@
                 <td class="py-4 px-6 border-b border-gray-200">{{ product_option.isRequired ? 'Yes' : 'No' }}</td>
                 <td class="py-4 px-6 border-b border-gray-200">{{ product_option.displayOrder }}</td>
                 <td class="py-4 px-6 border-b border-gray-200">
-                    <a href="{{ path('app_product_option_show', {'id': product_option.id}) }}">show</a>
-                    <a href="{{ path('app_product_option_edit', {'id': product_option.id}) }}">edit</a>
+                    <div class="flex space-x-4">
+                        <a href="{{ path('app_product_option_edit', {'id': product_option.id}) }}" class="p-2 rounded-full group transition-all duration-500 flex items-center">
+                            <i class="fas fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="{{ path('app_product_option_show', {'id': product_option.id}) }}" class="p-2 rounded-full group transition-all duration-500 flex items-center">
+                            <i class="fas fa-solid fa-folder-open"></i>
+                        </a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -44,6 +50,16 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
+    <a href="{{ path('app_product_option_new') }}" class="inline-flex items-center mt-6 border-2 border-black bg-yellow-500 py-2 px-4 w-auto">
+        <span>Create new</span>
+        <span class="ml-2 flex-shrink-0 w-4 h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </span>
+    </a>
 
-    <a href="{{ path('app_product_option_new') }}">Create new</a>
+
 {% endblock %}

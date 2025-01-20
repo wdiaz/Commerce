@@ -29,6 +29,8 @@
 
                 <td class="py-4 px-6 border-b border-gray-200"> {% if product.mainImage is not null %}
                         <img src="{{ asset(product.imagePath)|imagine_filter('squared_thumbnail_small')  }}" alt="">
+                        {% else %}
+                            <img src="{{ asset('build/images/noimage.jpeg') }}" alt="{{ product.sku }}">
                     {% endif %}
 
                 </td>
@@ -39,8 +41,15 @@
                 <td class="py-4 px-6 border-b border-gray-200">{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td class="py-4 px-6 border-b border-gray-200">{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td class="py-4 px-6 border-b border-gray-200">
-                    <a href="{{ path('app_product_show', {'id': product.id, 'slug': product.slug}) }}">show</a>
-                    <a href="{{ path('app_admin_product_edit', {'id': product.id, 'slug': product.slug}) }}">edit</a>
+                    <div class="flex space-x-4">
+                        <a href="{{ path('app_admin_product_edit', {'id': product.id, 'slug': product.slug}) }}" class="p-2 rounded-full group transition-all duration-500 flex items-center">
+                            <i class="fas fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="{{ path('app_product_show', {'id': product.id, 'slug': product.slug}) }}" class="p-2 rounded-full group transition-all duration-500 flex items-center">
+                            <i class="fas fa-solid fa-folder-open"></i>
+                        </a>
+                    </div>
+
                 </td>
             </tr>
         {% else %}
