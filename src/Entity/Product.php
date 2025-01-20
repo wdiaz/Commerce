@@ -62,12 +62,6 @@ class Product implements ProductInterface
     private Collection $productAttributes;
 
     /**
-     * @var Collection<int, ProductOption>
-     */
-    #[ORM\ManyToMany(targetEntity: ProductOption::class, inversedBy: 'products')]
-    private Collection $productOptions;
-
-    /**
      * @var Collection<int, ProductVariant>
      */
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductVariant::class)]
@@ -81,7 +75,6 @@ class Product implements ProductInterface
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->productAttributes = new ArrayCollection();
-        $this->productOptions = new ArrayCollection();
         $this->productVariants = new ArrayCollection();
     }
 
@@ -318,30 +311,6 @@ class Product implements ProductInterface
                 $productAttribute->setProduct(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ProductOption>
-     */
-    public function getProductOptions(): Collection
-    {
-        return $this->productOptions;
-    }
-
-    public function addProductOption(ProductOption $productOption): static
-    {
-        if (!$this->productOptions->contains($productOption)) {
-            $this->productOptions->add($productOption);
-        }
-
-        return $this;
-    }
-
-    public function removeProductOption(ProductOption $productOption): static
-    {
-        $this->productOptions->removeElement($productOption);
 
         return $this;
     }

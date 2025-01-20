@@ -35,11 +35,6 @@ class ProductOption
     #[ORM\Column]
     private ?int $displayOrder = null;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'productOptions', orphanRemoval: true)]
-    private Collection $products;
 
     /**
      * @var Collection<int, ProductOptionValue>
@@ -55,7 +50,6 @@ class ProductOption
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
         $this->productOptionValues = new ArrayCollection();
         $this->productVariantOptions = new ArrayCollection();
     }
@@ -133,33 +127,6 @@ class ProductOption
     public function setDisplayOrder(int $displayOrder): static
     {
         $this->displayOrder = $displayOrder;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->addProductOption($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeProductOption($this);
-        }
 
         return $this;
     }
