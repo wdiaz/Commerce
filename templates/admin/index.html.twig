@@ -21,5 +21,13 @@
             <img src="{{ asset('build/images/noimage.jpeg') }}" alt="Customers" class="w-12 h-12">
             <a href="#"><span class="text-lg font-semibold text-gray-700">Customers</span></a>
         </div>
+       <div class="flex items-center space-x-4 p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+           <img src="{{ asset('build/images/noimage.jpeg') }}" alt="Customers" class="w-12 h-12">
+           <a href="{{ url('app_admin_search') }}"><span class="text-lg font-semibold text-gray-700">Search</span></a>
+       </div>
+       <div class="flex items-center space-x-4 p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+           <img src="{{ asset('build/images/noimage.jpeg') }}" alt="Customers" class="w-12 h-12">
+           <a href="{{ url('app_admin_search') }}"><span class="text-lg font-semibold text-gray-700">Orders</span></a>
+       </div>
     </div>
 {% endblock %}
