@@ -17,17 +17,6 @@ class SizeSelectorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('size', EntityType::class, [
-                'class' => ProductOptionValue::class,
-                'choices' => $options['sizes'],  // Dynamically load size options
-                'choice_label' => 'attribute_value',        // Use the size name or value
-                'multiple' => false,              // Single selection
-                'expanded' => false,              // Set true for dropdowns; false for radio buttons
-                'label' => 'Select Size',
-                'attr' => [
-                    'class' => 'bg-white shadow-sm ring-0 block w-full text-lg focus:outline-none focus:border-tan-500 border-tan-300 p-2 border-2',
-                ]
-            ])
             ->add('quantity', ChoiceType::class, [
                 'choices' => [
                     '1' => 1,
