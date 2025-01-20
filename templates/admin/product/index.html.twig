@@ -28,7 +28,7 @@
             <tr>
 
                 <td class="py-4 px-6 border-b border-gray-200"> {% if product.mainImage is not null %}
-                        <img src="{{ asset(product.imagePath)|imagine_filter('squared_thumbnail_small')  }}" alt="">
+                        <img src="{{ asset(product.mainImage) }}" alt="">
                         {% else %}
                             <img src="{{ asset('build/images/noimage.jpeg') }}" alt="{{ product.sku }}">
                     {% endif %}
