@@ -33,7 +33,7 @@ class ProductVariant
     #[ORM\OneToMany(mappedBy: 'productVariant', targetEntity: ProductVariantOption::class)]
     private Collection $productVariantOptions;
 
-    #[ORM\ManyToOne(inversedBy: 'productVariants')]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'productVariants')]
     private ?Product $product = null;
 
     #[ORM\Column(nullable: true)]

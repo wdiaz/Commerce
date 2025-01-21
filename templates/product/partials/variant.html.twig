@@ -14,13 +14,20 @@
         {% for variant in product.productVariants %}
             <div class="flex flex-col items-center">
                 <div class="relative">
-                    {% if variant.thumbnail is not null %}
-                        <img src="{{ variant.thumbnail }}" alt="Thumbnail" class="w-12 h-12 rounded">
+                    {% if variant.thumbnail %}
+                        <img src="{{ variant.thumbnail }}" alt="{{ variant.sku | escape }}" class="w-12 h-12 rounded" loading="lazy">
                     {% else %}
-                        <img src="https://m.media-amazon.com/images/I/413aecE0r2L._SS36_.jpg" alt="Thumbnail" class="w-12 h-12 rounded">
+                        <img src="https://m.media-amazon.com/images/I/413aecE0r2L._SS36_.jpg" alt="Default product image" class="w-12 h-12 rounded" loading="lazy">
                     {% endif %}
                 </div>
                 <span class="text-sm font-medium text-gray-700 mt-2">{{ variant.sku }}</span>
+                {% set color_option = null %}
+                {% for variantOption in variant.productVariantOptions %}
+                    {% if variantOption.productOption.attributeName == "color" %}
+                        {% set color_option = variantOption.productOptionValue.attributeValue %}
+                        <span class="text-sm text-gray-600">Color: {{ color_option }}</span>
+                    {% endif %}
+                {% endfor %}
             </div>
         {% endfor %}
     </div>

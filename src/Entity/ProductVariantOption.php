@@ -15,13 +15,16 @@ class ProductVariantOption
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productVariantOptions')]
+    #[ORM\ManyToOne(targetEntity: ProductVariant::class, inversedBy: 'productVariantOptions')]
+    #[ORM\JoinColumn(name: 'product_variant_id', referencedColumnName: 'id')]
     private ?ProductVariant $productVariant = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productVariantOptions')]
+    #[ORM\ManyToOne(targetEntity: ProductOption::class, inversedBy: 'productVariantOptions')]
+    #[ORM\JoinColumn(name: 'product_option_id', referencedColumnName: 'id')]
     private ?ProductOption $productOption = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productVariantOptions')]
+    #[ORM\ManyToOne(targetEntity: ProductOptionValue::class, inversedBy: 'productVariantOptions')]
+    #[ORM\JoinColumn(name: 'product_option_value_id', referencedColumnName: 'id')]
     private ?ProductOptionValue $productOptionValue = null;
 
     public function getId(): ?int
