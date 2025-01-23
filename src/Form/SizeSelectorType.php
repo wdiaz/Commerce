@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Entity\ProductOptionValue;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,7 +12,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SizeSelectorType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('quantity', ChoiceType::class, [
@@ -41,11 +44,15 @@ class SizeSelectorType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     * @return void
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => null,  // Not mapping to a specific entity
-            'sizes' => [],         // This allows dynamic size values
+            'data_class' => null,
+            'sizes' => [],
         ]);
 
         $resolver->setAllowedTypes('sizes', 'array');
