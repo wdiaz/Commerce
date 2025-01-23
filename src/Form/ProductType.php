@@ -76,6 +76,13 @@ class ProductType extends AbstractType
                 'attr' => ['class' => 'js-product-categories'],
                 'expanded' => false,
             ])
+
+            ->add('productVariants', CollectionType::class, [
+                'entry_type' => ProductVariantType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

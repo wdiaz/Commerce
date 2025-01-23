@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,7 +35,7 @@ class ProductRepository extends ServiceEntityRepository
         if ($query) {
             // Use wildcards to match partial queries
             $qb->andWhere('p.name LIKE :query OR p.longDescription LIKE :query')
-                ->setParameter('query', '%'.$query.'%');
+                ->setParameter('query', '%' . $query . '%');
         }
 
         return $qb->getQuery()->getResult();
@@ -45,5 +46,17 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->orderBy('p.id', 'ASC') // Adjust ordering as needed
             ->getQuery();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findBySku(string $sku): ?Product
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.sku = :sku')
+            ->setParameter('sku', $sku)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

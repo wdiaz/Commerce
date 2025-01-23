@@ -25,78 +25,38 @@
 
         <!-- Middle Column (medium size) -->
         <div class="col-span-5 p-6 shadow-md">
-            <h4 class="text-l pb-2 hover:underline transition duration-200"><a href="{{ path('app_store_view', { 'slug': product.merchant.slug }) }}">{{ product.merchant.name }}</a></h4>
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-black mb-2">{{product.name}}</h2>
-
-
-            <!-- rating bar -->
-
-
-            <div class="flex items-center pt pb-4">
-                <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
-                </svg>
-                <svg class="w-4 h-4 text-gray-300 me-1 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
-                </svg>
-                <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">4.95</p>
-                <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">out of</p>
-                <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">5</p>
+            {% include 'product/partials/ratingbar.html.twig' %}
+            <div class="product-widget">
+                {% if product.hasVariants %}
+                {% include 'product/partials/variant.html.twig' with {
+                    product: product,
+                    form: form
+                } %}
+                    {% else %}
+                        {% include 'product/partials/product.html.twig' with {
+                            product: product,
+                            form: form
+                        } %}
+                {% endif %}
             </div>
-            <!-- /rating bar -->
-
-            <div class="flex justify-center">
-                <div class="border-b border-gray-300 w-4/5"></div>
-            </div>
-
-            <div class="flex justify-left mt-4">
-                <h3 class="text-3xl font-bold mb-2">${{ product.price }}</h3>
-            </div>
-
-            <p class="text-gray-600 dark:text-black-300 text-sm mb-4 pt-4">
-               {{ product.longDescription|raw }}
-            </p>
         </div>
-
         <!-- Right Column (smallest) -->
-        <div class="col-span-2 p-6 rounded-lg shadow-md">
-            <h3 class="text-3xl font-bold mb-2">${{ product.price }}</h3>
-            <div class="flex justify-left">
-                <span class="text-xl font-semibold text-green-700">In Stock</span>
-            </div>
-
-            <!-- test symfony form -->
-            {{ form_start(form, {'action': path('app_cart_add_item', {'id': product.id} )})  }}
-            <div class="mb-4">
-                {{ form_label(form.quantity) }}
-                {{ form_widget(form.quantity, { 'attr': { 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500' } }) }}
-            </div>
-            <div class="mb-3">
-                {{ form_widget(form.addToCart, { 'attr': { 'class': 'w-full py-1.5 bg-yellow-500 text-white font-semibold rounded-md hover:bg-yellow-600 transition duration-200' } }) }}
-            </div>
-
-            {{ form_end(form) }}
-            <!-- end test symfony form -->
+        <div class="purchase-bar col-span-2 p-6 rounded-lg shadow-md">
+            {% include 'product/partials/addtocart.html.twig' with {
+                product: product,
+                form:form
+            } %}
         </div>
 
     </div>
     <!-- /product -->
 
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
+    <a href="{{ path('app_admin_product_index') }}">back to list</a>
 
-    <a href="{{ path('app_product_edit', {'id': product.id, 'slug': product.slug}) }}">edit</a>
+    <a href="{{ path('app_admin_product_edit', {'id': product.id, 'slug': product.slug}) }}">edit</a>
 
-    {{ include('product/_delete_form.html.twig') }}
+    {{ include('admin/product/_delete_form.html.twig') }}
 {% endblock %}
  {% block javascripts %}
      {{ parent() }}

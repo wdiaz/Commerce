@@ -5,12 +5,13 @@ namespace App\Factory;
 use App\Entity\Merchant;
 use Symfony\Component\Uid\UuidV4;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends ModelFactory<Merchant>
  *
  **/
-final class MerchantFactory extends ModelFactory
+final class MerchantFactory extends PersistentObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -22,12 +23,31 @@ final class MerchantFactory extends ModelFactory
         parent::__construct();
     }
 
+    public static function class(): string
+    {
+        return Merchant::class;
+    }
+
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
      * @todo add your default values here
      */
-    protected function getDefaults(): array
+
+    /**
+     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     */
+    protected function initialize(): static
+    {
+        return $this
+            // ->afterInstantiate(function(Merchant $merchant): void {})
+        ;
+    }
+
+    /**
+     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     */
+    protected function defaults(): array|callable
     {
         return [
             'locationX' => self::faker()->randomFloat(),
@@ -35,20 +55,5 @@ final class MerchantFactory extends ModelFactory
             'name' => self::faker()->text(50),
             'uuid' => UuidV4::v4(),
         ];
-    }
-
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-     */
-    protected function initialize(): self
-    {
-        return $this
-            // ->afterInstantiate(function(Merchant $merchant): void {})
-        ;
-    }
-
-    protected static function getClass(): string
-    {
-        return Merchant::class;
     }
 }

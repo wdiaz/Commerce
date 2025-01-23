@@ -31,7 +31,7 @@ class BreadcrumbsExtension extends AbstractExtension
 
         $breadcrumbs = [];
         while ($category) {
-            $url = $this->urlGenerator->generate('app_category_show', ['id' => $category->getId()]);
+            $url = $this->urlGenerator->generate('app_category_show', ['slug' => $category->getSlug()]);
             $breadcrumbs[] = sprintf('<a href="%s">%s</a>', $url, htmlspecialchars($category->getName(), ENT_QUOTES));
             $category = $category->getParent();
         }

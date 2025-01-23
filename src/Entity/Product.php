@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 #[ApiResource]
 #[ORM\Table(name: 'products')]
-class Product
+class Product implements ProductInterface
 {
     use TimestampableTrait;
 
@@ -39,9 +39,6 @@ class Product
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Variant::class, orphanRemoval: true)]
-    private Collection $variant;
-
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
 
@@ -59,34 +56,39 @@ class Product
     private ?string $price = null;
 
     /**
-     * Constructor
+     * @var Collection<int, ProductAttribute>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductAttribute::class)]
+    private Collection $productAttributes;
+
+    /**
+     * @var Collection<int, ProductVariant>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductVariant::class)]
+    private Collection $productVariants;
+
+    /**
+     * Constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->variant = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->productAttributes = new ArrayCollection();
+        $this->productVariants = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSku(): ?string
     {
         return $this->sku;
     }
 
     /**
-     * @param string $sku
-     *
      * @return $this
      */
     public function setSku(string $sku): self
@@ -96,17 +98,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
      * @return $this
      */
     public function setName(string $name): static
@@ -116,17 +113,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLongDescription(): ?string
     {
         return $this->longDescription;
     }
 
     /**
-     * @param string|null $longDescription
-     *
      * @return $this
      */
     public function setLongDescription(?string $longDescription): static
@@ -136,17 +128,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @param string|null $slug
-     *
      * @return $this
      */
     public function setSlug(?string $slug): static
@@ -165,8 +152,6 @@ class Product
     }
 
     /**
-     * @param Category $category
-     *
      * @return $this
      */
     public function addCategory(Category $category): static
@@ -179,52 +164,11 @@ class Product
     }
 
     /**
-     * @param Category $category
-     *
      * @return $this
      */
     public function removeCategory(Category $category): static
     {
         $this->categories->removeElement($category);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Variant>
-     */
-    public function getVariant(): Collection
-    {
-        return $this->variant;
-    }
-
-    /**
-     * @param Variant $variant
-     *
-     * @return $this
-     */
-    public function addVariant(Variant $variant): static
-    {
-        if (!$this->variant->contains($variant)) {
-            $this->variant->add($variant);
-            $variant->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Variant $variant
-     *
-     * @return $this
-     */
-    public function removeVariant(Variant $variant): static
-    {
-        if ($this->variant->removeElement($variant)) {
-            if ($variant->getProduct() === $this) {
-                $variant->setProduct(null);
-            }
-        }
 
         return $this;
     }
@@ -251,8 +195,6 @@ class Product
     }
 
     /**
-     * @param Image $image
-     *
      * @return $this
      */
     public function removeImage(Image $image): static
@@ -266,17 +208,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMainImage(): ?string
     {
         return $this->mainImage;
     }
 
     /**
-     * @param string|null $mainImage
-     *
      * @return $this
      */
     public function setMainImage(?string $mainImage): static
@@ -286,11 +223,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @param File|null $imageFile
-     *
-     * @return void
-     */
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -302,9 +234,6 @@ class Product
         }
     }
 
-    /**
-     * @return File|null
-     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
@@ -318,17 +247,12 @@ class Product
         return 'images/products/'.$this->getMainImage();
     }
 
-    /**
-     * @return Merchant|null
-     */
     public function getMerchant(): ?Merchant
     {
         return $this->merchant;
     }
 
     /**
-     * @param Merchant|null $merchant
-     *
      * @return $this
      */
     public function setMerchant(?Merchant $merchant): static
@@ -338,17 +262,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPrice(): ?string
     {
         return $this->price;
     }
 
     /**
-     * @param string $price
-     *
      * @return $this
      */
     public function setPrice(string $price): static
@@ -356,5 +275,78 @@ class Product
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVariant(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return Collection<int, ProductAttribute>
+     */
+    public function getProductAttributes(): Collection
+    {
+        return $this->productAttributes;
+    }
+
+    public function addProductAttribute(ProductAttribute $productAttribute): static
+    {
+        if (!$this->productAttributes->contains($productAttribute)) {
+            $this->productAttributes->add($productAttribute);
+            $productAttribute->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductAttribute(ProductAttribute $productAttribute): static
+    {
+        if ($this->productAttributes->removeElement($productAttribute)) {
+            // set the owning side to null (unless already changed)
+            if ($productAttribute->getProduct() === $this) {
+                $productAttribute->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductVariant>
+     */
+    public function getProductVariants(): Collection
+    {
+        return $this->productVariants;
+    }
+
+    public function addProductVariant(ProductVariant $productVariant): static
+    {
+        if (!$this->productVariants->contains($productVariant)) {
+            $this->productVariants->add($productVariant);
+            $productVariant->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductVariant(ProductVariant $productVariant): static
+    {
+        if ($this->productVariants->removeElement($productVariant)) {
+            // set the owning side to null (unless already changed)
+            if ($productVariant->getProduct() === $this) {
+                $productVariant->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function hasVariants(): bool
+    {
+        return false === $this->productVariants->isEmpty();
     }
 }

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% import 'includes/pagination.html.twig' as pagination %}
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_admin') }}" class="inline-flex items-center text-gray-600 hover:text-gray-800 font-semibold p-4">
+        <i class="fas fa-arrow-left mr-2"></i>
+        Back
+    </a>
+
+
+    <table class="sw-full table-fixed">
+        <thead>
+            <tr>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Image</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Sku</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Slug</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">LongDescription</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">CreatedAt</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">UpdatedAt</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+        {% for product in products %}
+            <tr>
+
+                <td class="py-4 px-6 border-b border-gray-200"> {% if product.mainImage is not null %}
+                        <img src="{{ asset(product.mainImage) }}" alt="">
+                        {% else %}
+                            <img src="{{ asset('build/images/noimage.jpeg') }}" alt="{{ product.sku }}">
+                    {% endif %}
+
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product.sku }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product.name }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product.slug }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product.longDescription|raw|truncate(100, true, '...') }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                    <div class="flex space-x-4">
+                        <a href="{{ path('app_admin_product_edit', {'id': product.id, 'slug': product.slug}) }}" class="p-2 rounded-full group transition-all duration-500 flex items-center">
+                            <i class="fas fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="{{ path('app_product_show', {'id': product.id, 'slug': product.slug}) }}" class="p-2 rounded-full group transition-all duration-500 flex items-center">
+                            <i class="fas fa-solid fa-folder-open"></i>
+                        </a>
+                    </div>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ pagination.renderPagination(currentPage, totalPages, path('app_admin_product_index')) }}
+
+    <a href="{{ path('app_admin_product_new') }}">Create new</a>
+
+{% endblock %}
