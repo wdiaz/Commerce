@@ -9,11 +9,11 @@ use App\Exceptions\ProductNotFoundException;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class CartService
+readonly class CartService
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        private readonly CartRepository $cartRepository,
+        private EntityManagerInterface $entityManager,
+        private CartRepository         $cartRepository,
     ) {
     }
 

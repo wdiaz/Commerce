@@ -185,4 +185,9 @@ class ProductVariant
 
         return $this;
     }
+
+    public function isVariant(): bool
+    {
+        return true;
+    }
 }
