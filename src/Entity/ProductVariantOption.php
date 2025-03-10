@@ -67,4 +67,9 @@ class ProductVariantOption
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->productOption->getName() ?? 'Unnamed Product Variant Option'; // Replace 'name' with the field you want to display
+    }
 }

@@ -107,4 +107,8 @@ class ProductOptionValue
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->attributeValue ?? 'Missing Attribute Value';
+    }
 }

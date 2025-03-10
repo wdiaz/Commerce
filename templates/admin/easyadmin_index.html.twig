@@ -1,0 +1,13 @@
+{# templates/admin/my-custom-page.html.twig #}
+{% extends '@!EasyAdmin/page/content.html.twig' %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    {# Add any custom admin stylesheets here #}
+{% endblock %}
+
+{% block head_javascript %}
+    {{ parent() }}
+    {# Include the admin.js file only for the admin panel #}
+    <script src="{{ asset('build/admin.js') }}"></script>
+{% endblock %}

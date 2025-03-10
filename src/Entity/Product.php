@@ -349,4 +349,8 @@ class Product implements ProductInterface
     {
         return false === $this->productVariants->isEmpty();
     }
+    public function __toString(): string
+    {
+        return $this->name ?? 'Unnamed Product'; // Replace 'name' with the field you want to display
+    }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/merchant')]
+#[Route('/admin1/merchant')]
 class MerchantController extends AbstractController
 {
     #[Route('/', name: 'app_admin_merchant_index', methods: ['GET'])]

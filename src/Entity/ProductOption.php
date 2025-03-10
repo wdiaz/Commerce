@@ -190,4 +190,9 @@ class ProductOption
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->name ?? 'Unnamed Product Option';
+    }
 }
