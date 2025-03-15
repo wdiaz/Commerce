@@ -16,24 +16,11 @@ class ProductController extends AbstractController
     #[Route('/{id}/{slug}', name: 'app_product_show', methods: ['GET', 'POST'])]
     public function show(Request $request, Product $product): Response
     {
-        $sku = $request->get('vs');
-        $productVariant = null;
-
-        /*
-         * @TODO: Investigate and refactor for better optimization
-         * Matching variant.
-         */
-        if ($product->hasVariants()) {
-            $productVariant = $product->getProductVariants()->filter(function ($variant) use ($sku) {
-                return $variant->getSku() === $sku;
-            })->first();
-        }
 
         $productActionForm = $this->createForm(SizeSelectorType::class);
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'productVariant' => $productVariant,
             'form' => $productActionForm->createView(),
         ]);
     }

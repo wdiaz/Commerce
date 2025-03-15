@@ -15,8 +15,6 @@ interface ProductInterface
 
     public function getMainImage(): ?string;
 
-    public function hasVariants(): bool;
-
     public function getPrice(): ?string;
 
     public function getLongDescription(): ?string;

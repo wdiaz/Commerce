@@ -6,22 +6,6 @@
     <h3 class="text-3xl font-bold mb-2">${{ product.price }}</h3>
 </div>
 
-
-<p>Variants</p>
-
-<div class=" bg-gray-400 p-4 border border-gray-600">
-    {% for variant in product.productVariants %}
-        <div class="relative">
-            <img src="https://m.media-amazon.com/images/I/413aecE0r2L._SS36_.jpg" alt="Thumbnail">
-        </div>
-    {% endfor %}
-
-</div>
-
-
-
-
-
 <p class="text-gray-600 dark:text-black-300 text-sm mb-4 pt-4">
     {{ product.longDescription|raw }}
 </p>

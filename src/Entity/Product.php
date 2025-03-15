@@ -55,17 +55,6 @@ class Product implements ProductInterface
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private ?string $price = null;
 
-    /**
-     * @var Collection<int, ProductAttribute>
-     */
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductAttribute::class)]
-    private Collection $productAttributes;
-
-    /**
-     * @var Collection<int, ProductVariant>
-     */
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductVariant::class)]
-    private Collection $productVariants;
 
     /**
      * Constructor.
@@ -74,8 +63,6 @@ class Product implements ProductInterface
     {
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
-        $this->productAttributes = new ArrayCollection();
-        $this->productVariants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -275,82 +262,5 @@ class Product implements ProductInterface
         $this->price = $price;
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isVariant(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @return Collection<int, ProductAttribute>
-     */
-    public function getProductAttributes(): Collection
-    {
-        return $this->productAttributes;
-    }
-
-    public function addProductAttribute(ProductAttribute $productAttribute): static
-    {
-        if (!$this->productAttributes->contains($productAttribute)) {
-            $this->productAttributes->add($productAttribute);
-            $productAttribute->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductAttribute(ProductAttribute $productAttribute): static
-    {
-        if ($this->productAttributes->removeElement($productAttribute)) {
-            // set the owning side to null (unless already changed)
-            if ($productAttribute->getProduct() === $this) {
-                $productAttribute->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ProductVariant>
-     */
-    public function getProductVariants(): Collection
-    {
-        return $this->productVariants;
-    }
-
-    public function addProductVariant(ProductVariant $productVariant): static
-    {
-        if (!$this->productVariants->contains($productVariant)) {
-            $this->productVariants->add($productVariant);
-            $productVariant->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductVariant(ProductVariant $productVariant): static
-    {
-        if ($this->productVariants->removeElement($productVariant)) {
-            // set the owning side to null (unless already changed)
-            if ($productVariant->getProduct() === $this) {
-                $productVariant->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function hasVariants(): bool
-    {
-        return false === $this->productVariants->isEmpty();
-    }
-    public function __toString(): string
-    {
-        return $this->name ?? 'Unnamed Product'; // Replace 'name' with the field you want to display
     }
 }
