@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\Partner;
 
 use App\Entity\Category;
 use App\Form\CategoryType;

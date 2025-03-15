@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Partner;
 
 use App\Entity\Merchant;
 use App\Form\MerchantType;
