@@ -32,7 +32,21 @@ class ProductCrudController extends AbstractCrudController
             SlugField::new('slug', 'Slug')->setTargetFieldName('name'),
             TextareaField::new('longDescription', 'Long Description')
                             ->setFormTypeOption('attr', ['class' => 'tinymce-editor']),
-            MoneyField::new('price', 'Price')->setCurrency('USD'),
+            MoneyField::new('price')
+                ->setCurrency('USD')
+                ->setNumDecimals(2)
+                ->setStoredAsCents(false)
+                ->setStoredAsCents(false)
+                ->setFormTypeOptions([
+                    'constraints' => [
+                        new \Symfony\Component\Validator\Constraints\Range([
+                            'min' => 5,
+                            'max' => 5000.00,
+                            'notInRangeMessage' => 'Price must be between $1 and $5000.00',
+                        ]),
+                    ],
+                ]),
+
             AssociationField::new('merchant', 'Merchant'),
             AssociationField::new('categories', 'Categories'),
             // CollectionField::new('images', 'Images'),

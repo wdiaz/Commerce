@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[Vich\Uploadable]
@@ -53,6 +54,11 @@ class Product implements ProductInterface
     private ?Merchant $merchant = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[Assert\Range(
+        notInRangeMessage: 'Price must be between 1 and 5000.00',
+        min: 1.00,
+        max: 5000.00,
+    )]
     private ?string $price = null;
 
 
