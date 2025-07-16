@@ -35,7 +35,7 @@ final class ProductFactory extends PersistentObjectFactory
     protected function defaults(): array|callable
     {
         $faker = Factory::create();
-        $faker->addProvider(new CustomProvider($faker));
+        $faker->addProvider(new ProductProvider($faker));
         $product = $faker->product();
 
         return [

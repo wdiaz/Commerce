@@ -7,7 +7,7 @@ use Faker\Provider\Base;
 use Symfony\Component\Yaml\Exception\RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 
-class CustomProvider extends Base
+class ProductProvider extends Base
 {
     private const DIRECTORY = '/config/';
     private const PRODUCTS = 'products.yml';
