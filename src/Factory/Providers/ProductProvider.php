@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Factory;
+namespace App\Factory\Providers;
 
 use Faker\Generator;
 use Faker\Provider\Base;
@@ -11,8 +11,6 @@ class ProductProvider extends Base
 {
     private const DIRECTORY = '/config/';
     private const PRODUCTS = 'products.yml';
-    protected static array $departments = ['Books', 'Movies', 'Music', 'Games', 'Electronics', 'Computers', 'Home', 'Garden', 'Tools', 'Grocery', 'Health', 'Beauty', 'Toys', 'Kids', 'Baby', 'Clothing', 'Shoes', 'Jewelry', 'Sports', 'Outdoors', 'Automotive', 'Industrial'];
-
     protected static array $productNames = [];
 
     public function __construct(Generator $generator)

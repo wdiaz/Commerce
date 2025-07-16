@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Product;
+use App\Factory\Providers\ProductProvider;
 use Faker\Factory;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
