@@ -64,9 +64,4 @@ class ProductProvider extends Base
     {
         return $this->generator->randomElements(self::$productNames)[0]['description'];
     }
-
-    public function category()
-    {
-        return $this->randomElement(self::$departments);
-    }
 }
