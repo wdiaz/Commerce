@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Factory\Providers\ProductProvider;
 use Faker\Factory;
@@ -47,6 +48,7 @@ final class ProductFactory extends PersistentObjectFactory
             'merchant' => MerchantFactory::createOne(),
             'price' => $product['price'],
             'main_image' => $product['main_image'],
+            'categories' => [CategoryFactory::random()]
         ];
     }
 

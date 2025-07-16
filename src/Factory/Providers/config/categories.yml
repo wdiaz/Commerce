@@ -1,0 +1,61 @@
+categories:
+categories:
+  - name: "Home & Kitchen"
+    parent: null
+
+  - name: "Kitchen & Dining"
+    parent: 1
+
+  - name: "Kitchen Utensils & Gadgets"
+    parent: 2
+
+  - name: "Pasta & Pizza Tools"
+    parent: 3
+
+  - name: "Pizza Peels"
+    parent: 4
+
+  - name: "Bakery & Baking Supplies"
+    parent: null
+
+  - name: "Flour & Grains"
+    parent: 6
+
+  - name: "Baking Utensils"
+    parent: 6
+
+  - name: "Ovens & Appliance Accessories"
+    parent: null
+
+  - name: "Microwaves & Toaster Ovens"
+    parent: 9
+
+  - name: "Blenders & Mixers"
+    parent: 9
+
+  - name: "Small Kitchen Appliances"
+    parent: null
+
+  - name: "Coffee Makers & Espresso Machines"
+    parent: 12
+
+  - name: "Toaster & Toasting Appliances"
+    parent: 12
+
+  - name: "Home Decor & Accessories"
+    parent: null
+
+  - name: "Rugs & Carpets"
+    parent: 15
+
+  - name: "Wall Art & Decor"
+    parent: 15
+
+  - name: "Bathroom Accessories"
+    parent: null
+
+  - name: "Towels & Linens"
+    parent: 18
+
+  - name: "Bath Rugs"
+    parent: 18

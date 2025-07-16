@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\ProductFactory;
+use App\Factory\CategoryFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * Load products onto the database
  */
-class ProductFixtures extends Fixture implements OrderedFixtureInterface
+class CategoryFixtures extends Fixture implements OrderedFixtureInterface
 {
     /**
      * @param ObjectManager $manager
@@ -18,12 +18,12 @@ class ProductFixtures extends Fixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
-        $product = ProductFactory::createMany(10);
+        $product = CategoryFactory::createMany(10);
         $manager->flush();
     }
 
     public function getOrder(): int
     {
-        return  10;
+        return  5;
     }
 }

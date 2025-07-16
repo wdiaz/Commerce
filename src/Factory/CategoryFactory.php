@@ -2,8 +2,8 @@
 
 namespace App\Factory;
 
-use App\DataFixtures\Providers\CategoryProvider;
 use App\Entity\Category;
+use App\Factory\Providers\CategoryProvider;
 use Faker\Factory;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -35,14 +35,11 @@ final class CategoryFactory extends PersistentProxyObjectFactory
     {
         $faker = Factory::create();
         $faker->addProvider(new CategoryProvider($faker));
-        $category = $faker->name();
-
+        $category = $faker->category();
 
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => $category['name'], //self::faker()->text(255),
-            'slug' => self::faker()->text(255),
-            'parentId' => $category['parentId'],
+            'name' => $category['name'],
         ];
     }
 
