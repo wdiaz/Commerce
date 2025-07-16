@@ -29,9 +29,15 @@ class ProductController extends AbstractController
     public function showBySku(string $sku, SkuSearchService $searchService): Response
     {
         $product = $searchService->findBySku($sku);
+        $productActionForm = $this->createForm(SizeSelectorType::class);
 
-        dump($product);
+        if (null === $product) {
+            throw $this->createNotFoundException(sprintf("%s, product not found", $sku));
+        }
 
-        exit;
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+            'form' => $productActionForm->createView(),
+        ]);
     }
 }
